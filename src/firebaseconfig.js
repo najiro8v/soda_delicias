@@ -3,8 +3,6 @@ import "firebase/auth";
 import "firebase/firestore";
 import "firebase/analytics";
 import "firebase/storage";
-import "firebase-admin";
-import "firebase-functions";
 const firebaseConfig = {
     apiKey: "AIzaSyCTa9zwGbZqrsbMTkUZf_ILU-k-0sQyd7Y",
     authDomain: "sodadelcias.firebaseapp.com",
