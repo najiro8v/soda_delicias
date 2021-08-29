@@ -1,24 +1,41 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Express from './components/Express';
+import Menu from "./components/Menu";
+import Inicio from "./components/Inicio";
+import Login from "./components/Login";
+import Admin from "./components/Admin";
+import Contacto from "./components/Contacto";
+import AddProduct from "./components/AddProduct";
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container-xl">
+      
+    {/*  <Menu></Menu>
+      <Router>
+        <Switch>
+          <Route exact path="/">
+          <Express></Express>
+          </Route> 
+          <Route  path="/express">
+          <Express></Express>
+          </Route> 
+        </Switch>
+      </Router>*/}
+      <Router>
+      <Menu></Menu>
+        <Switch>
+          <Route exact path="/" component={Inicio}></Route> 
+          <Route  path="/Producto" component={AddProduct}></Route> 
+          <Route  path="/express" component={Express}></Route>
+          <Route  path="/listado" component={Admin}></Route>
+          <Route  path="/login" component={Login}></Route> 
+          <Route  path="/contacto" component={Contacto}></Route> 
+        </Switch>
+      </Router>
+
     </div>
   );
 }
