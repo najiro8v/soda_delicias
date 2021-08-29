@@ -1,7 +1,7 @@
 import React, { useEffect, useState, Fragment } from "react";
 import {NavDropdown } from "react-bootstrap";
-import { MenuAdmin,MenuUser } from "./elemens/Menus";
-import { auth } from "../firebaseconfig";
+import { MenuAdmin,MenuNormal,MenuUser } from "./elemens/Menus";
+import { auth,dbNSQL } from "../firebaseconfig";
 import { useHistory } from "react-router-dom";
 
 
@@ -9,9 +9,14 @@ const Menu = () => {
 	const history = useHistory();
 	const [usuario, setUsuario] = useState(null as any)
 	useEffect(() => {
-		auth.onAuthStateChanged((user) => {
+		auth.onAuthStateChanged(async(user) => {
 			if (user) {
-				setUsuario(user.email);
+				try{
+				await dbNSQL.collection("user").get().then((data: any) => {
+					let usuario = data.docs.map((element: any) => { let { uid } = element.data(); if (uid === user.uid) { return element.data() }else{return undefined} }).filter((data: any) => data !== undefined)[0];
+					setUsuario(usuario.tipo);
+				  })
+				}catch(e){console.error(e)}
 			}
 		})
 	}, [])
@@ -30,9 +35,9 @@ const Menu = () => {
 					<div className="collapse navbar-collapse " id="navbarContent">
 						<ul className="navbar-nav">
 							
-							{usuario?
+							{usuario?usuario==="Administrador"?
 							
-								<MenuUser/>:<MenuAdmin/>
+								<MenuAdmin/>:<MenuUser/>:<MenuNormal/>
 
 							}
 							<li className="nav-item d-block d-lg-none d-md-none d-xl-none text-light bg-white"  >
@@ -43,7 +48,7 @@ const Menu = () => {
 											className="nav-link  "
 											title={<i className="bi bi-gear "></i>}
 										>
-											<NavDropdown.Item onClick={(e) => { history.push("action-2") }}>Seting</NavDropdown.Item>
+											<NavDropdown.Item onClick={(e) => { history.push("edit") }}>editar</NavDropdown.Item>
 											<NavDropdown.Item onClick={(e) => { history.push("action-2") }}>Seting</NavDropdown.Item>
 											<NavDropdown.Item onClick={(e) => { history.push("action-2") }}>Seting</NavDropdown.Item>
 											<NavDropdown.Divider />
@@ -70,7 +75,7 @@ const Menu = () => {
 								id="nav-dropdown-dark-example "
 								title={<i className="bi bi-gear text-secondary"></i>}
 							>
-								<NavDropdown.Item onClick={(e) => { history.push("action-2") }}>Seting</NavDropdown.Item>
+								<NavDropdown.Item onClick={(e) => { history.push("edit") }}>editar</NavDropdown.Item>
 								<NavDropdown.Item onClick={(e) => { history.push("action-2") }}>Seting</NavDropdown.Item>
 								<NavDropdown.Item onClick={(e) => { history.push("action-2") }}>Seting</NavDropdown.Item>
 								<NavDropdown.Divider />

@@ -1,8 +1,8 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { dbNSQL } from "../firebaseconfig";
-const Contacto = () => {
+const MenuComida = () => {
     const [img, setImg] = useState([] as any);
-    useEffect(()=>{
+    useEffect(() => {
         const readData = async () => {
             try {
                 await dbNSQL.collection("img").get().then((data: any) => {
@@ -21,17 +21,17 @@ const Contacto = () => {
             }
         }
         readData();
-    },[])
-    
+    }, [])
+
     return (
         <div>
-            <h2>Contacto</h2>
+            <h3 className="text-center mb-3" >Menu</h3>
             {/*<label htmlFor="exampleFormControlFile1" className="btn btn-outline-info">Foto del Productos</label>
             <input type="file" className="form-control-file  d-none" id="exampleFormControlFile1" onChange={subirFoto} />*/}
-            <div className="d-flex wrap justify-content-around mt-5">
+            <div className="d-flex flex-wrap justify-content-center mt-5">
                 {
                     img.map((infoImg: any) =>
-                        <div key={infoImg.id} className="card" style={{ width: "18rem" }}>
+                        <div key={infoImg.id} className="card mt-3 ms-3" style={{ width: "10rem" }}>
                             <img src={infoImg.url} className="card-img-top" alt="Imagen del producto" />
                             <div className="card-body">
                                 <h5 className="card-title" >{infoImg.name}</h5>
@@ -45,4 +45,4 @@ const Contacto = () => {
     )
 }
 
-export default Contacto;
+export default MenuComida;

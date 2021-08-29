@@ -5,7 +5,7 @@ const Express = () => {
 
     return (
         <div className="container" >
-            <div id="carouselExampleSlidesOnly" className="carousel slide" data-bs-ride="carousel" >
+            <div id="carouselExampleSlidesOnly" className="carousel slide shadow" data-bs-ride="carousel" >
                 <div className="carousel-inner">
                     <div className="carousel-item active">
                         <img
@@ -26,11 +26,11 @@ const Express = () => {
                     <span className="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span className="sr-only"></span>
                 </button>
-                <button className="carousel-control-next" data-bs-target="#carouselExampleSlidesOnly"  data-bs-slide="next">
+                <button className="carousel-control-next" data-bs-target="#carouselExampleSlidesOnly" data-bs-slide="next">
                     <span className="carousel-control-next-icon" aria-hidden="true"></span>
                     <span className="sr-only"></span>
                 </button>
-            </div>
+            </div >
         </div >
     )
 }
