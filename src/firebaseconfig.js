@@ -4,14 +4,14 @@ import "firebase/firestore";
 import "firebase/analytics";
 import "firebase/storage";
 const firebaseConfig = {
-    apiKey: "AIzaSyCTa9zwGbZqrsbMTkUZf_ILU-k-0sQyd7Y",
-    authDomain: "sodadelcias.firebaseapp.com",
-    projectId: "sodadelcias",
-    storageBucket: "sodadelcias.appspot.com",
-    messagingSenderId: "1068321241552",
-    appId: "1:1068321241552:web:0f8012a38249bb48dee1d5",
-    measurementId: "G-JB2ZYW3LW5"
-  };
+  apiKey: "AIzaSyCTa9zwGbZqrsbMTkUZf_ILU-k-0sQyd7Y",
+  authDomain: "sodadelcias.firebaseapp.com",
+  projectId: "sodadelcias",
+  storageBucket: "sodadelcias.appspot.com",
+  messagingSenderId: "1068321241552",
+  appId: "1:1068321241552:web:0f8012a38249bb48dee1d5",
+  measurementId: "G-JB2ZYW3LW5"
+};
   // Initialize Firebase
 
   const fire = firebase.initializeApp(firebaseConfig);
