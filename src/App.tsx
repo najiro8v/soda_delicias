@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Express from './components/Express';
+import ExpressEdit from './components/ExpressEdit';
 import Menu from "./components/Menu";
 import Inicio from "./components/Inicio";
 import Login from "./components/Login";
 import EditUser from "./components/EditUser";
 import AddProduct from "./components/AddProduct";
 import MenuComida from "./components/MenuComida";
+import MenuComidaAdmin from "./components/MenuComidaAdmin";
+
 import { auth, dbNSQL } from "./firebaseconfig";
 
 function App() {
@@ -43,16 +46,15 @@ function App() {
 
         <Switch>
           <Route exact path="/" component={Inicio}></Route>
-          <Route path="/express" component={Express}></Route>
+          <Route path="/express" >{usuario !== "Administrador"?<Express></Express>:<ExpressEdit></ExpressEdit>}</Route>
           <Route path="/login" component={Login}></Route>
-          <Route path="/menu" component={MenuComida}></Route>
+          <Route path="/menu" component={usuario !== "Administrador"?MenuComida:MenuComidaAdmin}></Route>
           {usuario ? usuario !== "Administrador" ?
             <Switch>
               <Route path="/edit" component={EditUser}></Route>
             </Switch> :
             <Switch>
               <Route path="/edit" component={EditUser}></Route>
-              
               <Route path="/addProduct" component={AddProduct}></Route>
             </Switch>
             : null

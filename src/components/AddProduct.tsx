@@ -22,28 +22,37 @@ const AddProduct = () => {
             pass = true;
         }
         try {
-            /*let imgRef =*/
             if (pass) {
                 let file = img[0];
                 setMsgError("");
-                let storageRef = await storageBucket.ref('test/' + file.name);
-                await storageRef.put(file).then((data: any) => {
-                    storageRef.getDownloadURL().then((ulr: any) => {
-                        let Product = {
-                            disponible: true,
-                            tipo: null,
-                            precio: precio,
-                            name: nombre,
-                            ImgName: file.name,
-                            path: 'test/' + file.name,
-                            url: ulr
-                        }
-                        dbNSQL.collection("img").add(Product);
-                        setImg(null);
-                        setNombre("");
-                        setPrecio("");
+                let Product = {
+                    disponible: true,
+                    tipo: null,
+                    precio: precio,
+                    name: nombre,
+                    ImgName: null,
+                    path: null,
+                    url: null
+                }
+                await dbNSQL.collection("Product").add(Product).then(async (product: any) => {
+                    let { id } = product;
+                    let storageRef = await storageBucket.ref('test/' + id);
+                    await storageRef.put(file).then(async (data: any) => {
+
+                        await storageRef.getDownloadURL().then((ulr: any) => {
+
+                            dbNSQL.collection("Product").doc(id).update({
+                                ImgName: id,
+                                path: 'test/' + id,
+                                url: ulr
+                            });
+                            setImg(null);
+                            setNombre("");
+                            setPrecio("");
+                        });
                     });
-                })
+                });
+
             }
         } catch (e) { console.error(e); }
 

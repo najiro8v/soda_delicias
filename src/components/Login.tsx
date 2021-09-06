@@ -6,17 +6,18 @@ const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [msgError, setMsgError] = useState("");
+    const [login, setLogin] = useState(true);
     const RegistrarUsuario = (e: any) => {
         e.preventDefault();
         auth.createUserWithEmailAndPassword(email, password)
-            .then((r:any) => {
+            .then((r: any) => {
                 let Product = {
-                    uid:r.user.uid,
+                    uid: r.user.uid,
                     email: email,
                     tipo: "usuario",
                     nombre: null,
                     edad: null,
-                    numero:null,
+                    numero: null,
                     dirrecion: null,
                     img: null,
                 }
@@ -40,6 +41,7 @@ const Login = () => {
     }
 
     const LoginUser = (e: any) => {
+        e.preventDefault();
         auth.signInWithEmailAndPassword(email, password).then((r: any) => {/*console.log(r.user.uid);*/history.push("/") })
             .catch((err) => {
                 console.error(err);
@@ -65,7 +67,7 @@ const Login = () => {
         <div className="row mt-5">
             <div className="col"></div>
             <div className="col">
-                <form onSubmit={RegistrarUsuario} className="form-group">
+                <form onSubmit={login ? LoginUser : RegistrarUsuario} className="form-group">
                     <input
                         onChange={(e) => { setEmail(e.target.value); }}
                         className="form-control"
@@ -81,15 +83,26 @@ const Login = () => {
                         type="password"
 
                     />
-                    <input
-                        className="btn btn-block mt-4 btn-outline-dark w-100"
-                        type="submit"
-                        value="Registrar usuario"
-                    />
+                    {login ?
+                        <div className="input-group">
+                            <input className="btn btn-block mt-4 btn-outline-warning w-100"
+                                type="submit"
+                                value="Iniciar Sesión"
+                            />
+                            <p className="font-weight-light mt-4 text-center">Si ya tienes cuenta puedes logearte <span className="link" style={{ cursor: "pointer" }} onClick={() => { setLogin(!login) }}><u>Aquí</u></span></p>
+                        </div>
+                        :
+                        <div className="input-group">
+                            <input
+                                className="form-control btn btn-block mt-4 btn-outline-dark w-100"
+                                type="submit"
+                                value="Registrar usuario" />
+                            <p className="font-weight-light mt-4 text-center">Si no tienes cuenta Registrate <span className="link" style={{ cursor: "pointer" }} onClick={() => { setLogin(!login) }}><u>Aquí</u></span></p>
+                        </div>
+
+                    }
                 </form>
-                <button className="btn btn-block mt-4 btn-outline-warning w-100" onClick={LoginUser}>
-                    Iniciar Sesión
-                </button>
+
             </div>
             <div className="col"></div>
             {

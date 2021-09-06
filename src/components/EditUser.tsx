@@ -10,11 +10,9 @@ const EditUser = () => {
     const [email, setEmail] = useState("");
     const [img, setImg] = useState(null as any);
     //email, tipo, nombre, edad, dirrecion, img
-    const [msgError, setMsgError] = useState("");
     const subirFoto = async (e: any) => {
         e.preventDefault();
         try {
-            /*let imgRef =*/
             let { uid,tipo } = usuario;
             let Product = {
                 uid:uid,
@@ -97,7 +95,6 @@ const EditUser = () => {
                         </div>
                         <input type="submit" className="form-control mt-3 btn btn-outline-secondary" value="Guardar el producto" />
                     </form>
-                    {msgError.length !== 0 ? <div className=" row alert alert-danger mt-5" role="alert">{msgError}</div> : <span></span>}
                 </div>
                 <div className="col"></div>
             </div>
