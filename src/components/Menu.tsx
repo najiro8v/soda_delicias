@@ -14,7 +14,8 @@ const Menu = () => {
 				try {
 					await dbNSQL.collection("user").get().then((data: any) => {
 						let usuario = data.docs.map((element: any) => { let { uid } = element.data(); if (uid === user.uid) { return element.data() } else { return undefined } }).filter((data: any) => data !== undefined)[0];
-						setUsuario(usuario.tipo);
+						setUsuario(usuario===undefined?null:usuario.tipo);
+
 					})
 				} catch (e) { console.error(e) }
 			}

@@ -50,12 +50,12 @@ const MenuComidaAdmin = () => {
         }
         readData();
     }, [change])
-    const changeDispo= async (e: boolean) => {
-        await dbNSQL.collection("Product").doc(id).update({disponible:e}).then(async () => {
+    const changeDispo = async (e: boolean) => {
+        await dbNSQL.collection("Product").doc(id).update({ disponible: e }).then(async () => {
             setChange(!change)
             setModalDispo(false);
         });
-        
+
 
 
     }
@@ -77,36 +77,30 @@ const MenuComidaAdmin = () => {
         try {
             if (pass) {
                 let file = img[0];
-                setMsgError("");
-                let Product = img[0].change ? {
-                    precio: precio,
-                    name: nombre,
-                    ImgName: null,
-                } : {
-                    precio: precio,
-                    name: nombre,
-                }
-                await dbNSQL.collection("Product").doc(id).update(Product).then(async () => {
-                    if (file.change !== null) {
-                        let storageRef = await storageBucket.ref('test/' + id);
-                        await storageRef.put(file).then(async (data: any) => {
 
-                            await storageRef.getDownloadURL().then((ulr: any) => {
-
-                                dbNSQL.collection("Product").doc(id).update({
-                                    ImgName: id,
-                                    path: 'test/' + id,
-                                    url: ulr
-                                });
-                            });
-                        });
-                    }
-                    setChange(!change);
-                    setModal(false);
-                });
-
-
-
+                     setMsgError("");
+                     let Product =  {
+                         precio: precio,
+                         name: nombre,
+                     };
+                     await dbNSQL.collection("Product").doc(id).update(Product).then(async () => {
+                         if (file.change === undefined) {
+                             let storageRef = await storageBucket.ref('test/' + id);
+                             await storageRef.put(file).then(async (data: any) => {
+     
+                                 await storageRef.getDownloadURL().then((ulr: any) => {
+     
+                                     dbNSQL.collection("Product").doc(id).update({
+                                         ImgName: id,
+                                         path: 'test/' + id,
+                                         url: ulr
+                                     });
+                                 });
+                             });
+                         }
+                         setChange(!change);
+                         setModal(false);
+                     });
             }
         } catch (e) { console.error(e); }
 
@@ -120,8 +114,8 @@ const MenuComidaAdmin = () => {
 
                 <p className="text-md-start text-md-center">Desea cambiar la disponibilidad de este producto</p>
                 <div className="d-flex justify-content-around mt-4 flex-wrap" >
-                    <button className="btn btn-success btn-sm" onClick={()=>{changeDispo(true)}}>Disponible</button>
-                    <button className="btn btn-warning btn-sm mt-1" onClick={()=>{changeDispo(false)}}>No Disponible</button>
+                    <button className="btn btn-success btn-sm" onClick={() => { changeDispo(true) }}>Disponible</button>
+                    <button className="btn btn-warning btn-sm mt-1" onClick={() => { changeDispo(false) }}>No Disponible</button>
                 </div>
 
             </div>
@@ -186,7 +180,7 @@ const MenuComidaAdmin = () => {
                                         setMsgError("")
                                         toggle();
                                     }}>Editar</button>
-                                    <button className={["btn btn-sm",infoImg.disponible?"btn-outline-info":"btn-outline-warning"].join(" ")} onClick={(e) => { setModalDispo(!modalDispo);setId(infoImg.id) }}>{infoImg.disponible?"disponible":"No disponible"} </button>
+                                    <button className={["btn btn-sm", infoImg.disponible ? "btn-outline-info" : "btn-outline-warning"].join(" ")} onClick={(e) => { setModalDispo(!modalDispo); setId(infoImg.id) }}>{infoImg.disponible ? "disponible" : "No disponible"} </button>
                                 </div>
                             </div>
                         </div>

@@ -19,7 +19,8 @@ function App() {
       if (user) {
         await dbNSQL.collection("user").get().then((data: any) => {
           let usuario = data.docs.map((element: any) => { let { uid } = element.data(); if (uid === user.uid) { return element.data() } else { return undefined } }).filter((data: any) => data !== undefined)[0];
-          setUsuario(usuario.tipo);
+          setUsuario(usuario===undefined?null:usuario.tipo);
+
         })
       }
       else {
@@ -46,7 +47,7 @@ function App() {
 
         <Switch>
           <Route exact path="/" component={Inicio}></Route>
-          <Route path="/express" >{usuario !== "Administrador"?<Express></Express>:<ExpressEdit></ExpressEdit>}</Route>
+          <Route path="/express" component={usuario !== "Administrador"?Express:ExpressEdit} />
           <Route path="/login" component={Login}></Route>
           <Route path="/menu" component={usuario !== "Administrador"?MenuComida:MenuComidaAdmin}></Route>
           {usuario ? usuario !== "Administrador" ?
