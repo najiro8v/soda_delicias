@@ -50,7 +50,7 @@ const Express = (props?: any) => {
                                     {img.url.length!== 0 ? <img
                                         src={img.url}
                                         className="d-block  w-100"
-                                        alt="..."
+                                        alt="..." 
                                     />
                                         :
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="bi bi-card-image card-img-top d-block  w-100" viewBox="0 0 16 16">
