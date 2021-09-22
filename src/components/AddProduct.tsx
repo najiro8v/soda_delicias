@@ -36,14 +36,14 @@ const AddProduct = () => {
                 }
                 await dbNSQL.collection("Product").add(Product).then(async (product: any) => {
                     let { id } = product;
-                    let storageRef = await storageBucket.ref('test/' + id);
+                    let storageRef = await storageBucket.ref('Product/' + id);
                     await storageRef.put(file).then(async (data: any) => {
 
                         await storageRef.getDownloadURL().then((ulr: any) => {
 
                             dbNSQL.collection("Product").doc(id).update({
                                 ImgName: id,
-                                path: 'test/' + id,
+                                path: 'Product/' + id,
                                 url: ulr
                             });
                             setImg(null);
@@ -58,7 +58,7 @@ const AddProduct = () => {
 
     }
     return (
-        <div className="container">
+        <div className="container-fluid">
             <div className="row">
                 <div className="col"></div>
                 <div className="col">

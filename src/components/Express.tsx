@@ -38,19 +38,19 @@ const Express = (props?: any) => {
                                     <path d="M1.5 2A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13zm13 1a.5.5 0 0 1 .5.5v6l-3.775-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12v.54A.505.505 0 0 1 1 12.5v-9a.5.5 0 0 1 .5-.5h13z" />
                                 </svg>
                             }
-                            {imgP ? <div className="carousel-caption d-none d-md-block" style={{ backgroundColor: "#22222233" }} >
-                                <h3 style={{ color: "#eee" }}>{imgP.name}</h3>
-                                <h4 style={{ color: "#eee" }}>{imgP.precio}</h4>
-                            </div>:null}
+                            {imgP ? <div className="carousel-caption d-block" style={{ backgroundColor: "#22222233" }} >
+                                <h3 className="d-block" style={{ color: "#eee" }}>{imgP.name}</h3>
+                                <h4 className="d-none d-md-block" style={{ color: "#eee" }}>{imgP.precio}</h4>
+                            </div> : null}
                         </div>
-                        
+
                         {
                             imgs.map((img: any) => (
                                 <div className="carousel-item " key={img.id}>
-                                    {img.url.length!== 0 ? <img
+                                    {img.url.length !== 0 ? <img
                                         src={img.url}
                                         className="d-block  w-100"
-                                        alt="..." 
+                                        alt="..."
                                     />
                                         :
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="bi bi-card-image card-img-top d-block  w-100" viewBox="0 0 16 16">
@@ -58,11 +58,11 @@ const Express = (props?: any) => {
                                             <path d="M1.5 2A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13zm13 1a.5.5 0 0 1 .5.5v6l-3.775-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12v.54A.505.505 0 0 1 1 12.5v-9a.5.5 0 0 1 .5-.5h13z" />
                                         </svg>
                                     }
-                                     {img.name.length!==0||img.precio.length!==0?
-                                    <div className="carousel-caption d-none d-md-block" style={{ backgroundColor: "#22222233" }}>
-                                        <h3 style={{ color: "#eee" }}>{img.name}</h3>
-                                        <h4 style={{ color: "#eee" }}>{img.precio}</h4>
-                                    </div>:null}
+                                    {img.name.length !== 0 || img.precio.length !== 0 ?
+                                        <div className="carousel-caption  d-sm-block d-block d-md-block  d-sm-block" style={{ backgroundColor: "#22222233" }}>
+                                            <h3 className="d-block" style={{ color: "#eee" }}>{img.name}</h3>
+                                            <h4 className="d-none d-md-block "style={{ color: "#eee" }}>{img.precio}</h4>
+                                        </div> : null}
                                 </div>
                             ))
                         }

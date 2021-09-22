@@ -14,7 +14,6 @@ const ExpressEdit = () => {
     const [id, setId] = useState(null as any);
     const [msgError, setMsgError] = useState("");
     const [change, setChange] = useState(false);
-    const [image, setImage] = useState([] as any);
     useEffect(() => {
         const getCarousel = async () => {
             try {
@@ -56,6 +55,7 @@ const ExpressEdit = () => {
 
     const deleteProduct = async (e: any) => {
         e.preventDefault();
+
         if (isNaN(id)) {
             await dbNSQL.collection("Carrousel").doc(id).delete().then(async () => {
                 let storageRef = await storageBucket.ref('Carrousel/' + id);
@@ -63,6 +63,9 @@ const ExpressEdit = () => {
                     setChange(!change);
                     setModalTrash(false);
                     setId(null);
+                    setImg(null);
+                    setNombre("");
+                    setPrecio("");
                 }).catch(function (error) {
                     // Uh-oh, an error occurred!
                     console.error(error)
@@ -71,7 +74,7 @@ const ExpressEdit = () => {
         }
 
     }
-    const subirFoto = async (e: any) => {
+    const updateProduct = async (e: any) => {
         e.preventDefault();
         let pass = false;
         if (!precio.trim()) {
@@ -143,7 +146,10 @@ const ExpressEdit = () => {
                                 });
                             });
                         }
-                        setChange(!change); 
+                        setImg(null);
+                        setNombre("");
+                        setPrecio("");
+                        setChange(!change);
                         setId(null);
                         setModal(false);
 
@@ -157,14 +163,14 @@ const ExpressEdit = () => {
     const toggleTrash = () => setModalTrash(!modalTrash);
     const modalProduct = (
         <div style={{ position: "fixed", zIndex: 1, left: 0, top: 0, width: " 100%", height: "100%", overflow: "auto", backgroundColor: "rgba(0,0,0,0.6) " }} onClick={(e) => {
-            
+
             setImg(null);
             setNombre("");
             setPrecio("");
             toggle();
         }}>
             <div style={{ margin: "5% auto", width: "50%", padding: "5rem", }} onClick={(e) => { e.stopPropagation(); }}>
-                <form className="form-group" onSubmit={subirFoto}>
+                <form className="form-group" onSubmit={updateProduct}>
 
                     <div className="input-group">
                         <button className="btn btn-secondary " id="btn-show-psw" type="button"><i className="bi bi-cash-coin"></i></button>
@@ -218,13 +224,16 @@ const ExpressEdit = () => {
             <div className="card-body">
                 <p className="card-title d-flex align-items-center" ><i className="bi bi-card-text" /><label className=" ms-3" >Nombre</label></p>
                 <p className="card-text d-flex align-items-center"><i className="bi bi-cash-coin" /> <label className=" ms-3" >Precio</label></p>
-                <button className="btn btn-info btn-sm col-9" onClick={() => { setId(id); toggle() }}>Editar</button>
+                <button className="btn btn-info btn-sm col-9" onClick={() => {
+                    setId(id);
+                    toggle();
+                }}>Editar</button>
                 <button className="btn  btn-sm col" onClick={deleteCard}><i className="bi bi-trash-fill" /></button>
             </div>
         </div>
     ))
 
-    const expressDiv = (<div className="row">
+    /*const expressDiv = (<div className="row">
         <div className="col"></div>
         <div className="col-lg-4 col-sm-9">
             <Express props={change} />
@@ -232,12 +241,12 @@ const ExpressEdit = () => {
         <div className="col"></div>
     </div>
 
-    )
+    )*/
     return (
-        <div className="container" >
+        <div className="container-fluid" >
             {modal ? modalProduct : null}
             {modalTrash ? modalProductTrash : null}
-            {expressDiv}
+            <Express props={change} />
             <div className="row">
                 <div className="d-flex flex-wrap justify-content-center mt-5">
                     {
@@ -255,8 +264,17 @@ const ExpressEdit = () => {
                                 <div className="card-body">
                                     <p className="card-title d-flex align-items-center" ><i className="bi bi-card-text" /><label className=" ms-3" >{infoImg.name ? infoImg.name : "Nombre"}</label></p>
                                     <p className="card-text d-flex align-items-center"><i className="bi bi-cash-coin" /> <label className=" ms-3" > {infoImg.precio ? infoImg.precio : "Precio"}</label></p>
-                                    <button className="btn btn-info btn-sm col-9" onClick={() => { setId(infoImg.id); toggle(); }}>Editar</button>
-                                    <button className="btn btn-sm col" onClick={() => { setId(infoImg.id); toggleTrash() }}><i className="bi bi-trash-fill" /></button>
+                                    <button className="btn btn-info btn-sm col-9" onClick={() => {
+                                        setId(infoImg.id);
+                                        setNombre(infoImg.name);
+                                        setPrecio(infoImg.precio);
+                                        setImg([{ name: "IMAGEN ORIGINAL", change: false }]);
+                                        toggle();
+                                    }}>Editar</button>
+                                    <button className="btn btn-sm col" onClick={() => {
+                                        setId(infoImg.id);
+                                        toggleTrash()
+                                    }}><i className="bi bi-trash-fill" /></button>
 
                                 </div>
                             </div>

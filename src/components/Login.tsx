@@ -64,7 +64,7 @@ const Login = () => {
     auth/weak-password
     */
     return (
-        <div className="row mt-5">
+        <div className="row mt-5 container-fluid m-0">
             <div className="col"></div>
             <div className="col">
                 <form onSubmit={login ? LoginUser : RegistrarUsuario} className="form-group">

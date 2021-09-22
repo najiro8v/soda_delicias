@@ -10,6 +10,8 @@ const MenuComidaAdmin = () => {
     const [msgError, setMsgError] = useState("");
     const [change, setChange] = useState(false);
     const [image, setImage] = useState([] as any);
+
+    const [modalTrash, setModalTrash] = useState(false);
     useEffect(() => {
         const readData = async () => {
             try {
@@ -50,16 +52,33 @@ const MenuComidaAdmin = () => {
         }
         readData();
     }, [change])
+
     const changeDispo = async (e: boolean) => {
         await dbNSQL.collection("Product").doc(id).update({ disponible: e }).then(async () => {
             setChange(!change)
             setModalDispo(false);
         });
+    }
 
-
+    const deleteProduct = async (e: any) => {
+        e.preventDefault();
+        if (isNaN(id)) {
+            await dbNSQL.collection("Product").doc(id).delete().then(async () => {
+                let storageRef = await storageBucket.ref('Product/' + id);
+                await storageRef.delete().then(function () {
+                    setChange(!change);
+                    setModalTrash(false);
+                    setId(null);
+                }).catch(function (error) {
+                    // Uh-oh, an error occurred!
+                    console.error(error)
+                });
+            })
+        }
 
     }
-    const subirFoto = async (e: any) => {
+
+    const UpdateProduct = async (e: any) => {
         e.preventDefault();
         let pass = false;
         if (!precio.trim()) {
@@ -78,29 +97,29 @@ const MenuComidaAdmin = () => {
             if (pass) {
                 let file = img[0];
 
-                     setMsgError("");
-                     let Product =  {
-                         precio: precio,
-                         name: nombre,
-                     };
-                     await dbNSQL.collection("Product").doc(id).update(Product).then(async () => {
-                         if (file.change === undefined) {
-                             let storageRef = await storageBucket.ref('test/' + id);
-                             await storageRef.put(file).then(async (data: any) => {
-     
-                                 await storageRef.getDownloadURL().then((ulr: any) => {
-     
-                                     dbNSQL.collection("Product").doc(id).update({
-                                         ImgName: id,
-                                         path: 'test/' + id,
-                                         url: ulr
-                                     });
-                                 });
-                             });
-                         }
-                         setChange(!change);
-                         setModal(false);
-                     });
+                setMsgError("");
+                let Product = {
+                    precio: precio,
+                    name: nombre,
+                };
+                await dbNSQL.collection("Product").doc(id).update(Product).then(async () => {
+                    if (file.change === undefined) {
+                        let storageRef = await storageBucket.ref('Product/' + id);
+                        await storageRef.put(file).then(async (data: any) => {
+
+                            await storageRef.getDownloadURL().then((ulr: any) => {
+
+                                dbNSQL.collection("Product").doc(id).update({
+                                    ImgName: id,
+                                    path: 'Product/' + id,
+                                    url: ulr
+                                });
+                            });
+                        });
+                    }
+                    setChange(!change);
+                    setModal(false);
+                });
             }
         } catch (e) { console.error(e); }
 
@@ -125,7 +144,7 @@ const MenuComidaAdmin = () => {
             toggle();
         }}>
             <div style={{ margin: "5% auto", width: "50%", padding: "5rem", }} onClick={(e) => { e.stopPropagation(); }}>
-                <form className="form-group" onSubmit={subirFoto}>
+                <form className="form-group" onSubmit={UpdateProduct}>
 
                     <div className="input-group">
                         <button className="btn btn-secondary " id="btn-show-psw" type="button"><i className="bi bi-cash-coin"></i></button>
@@ -154,12 +173,28 @@ const MenuComidaAdmin = () => {
             </div>
         </div>
     )
+    const modalProductTrash = (
+        <div style={{ position: "fixed", zIndex: 1, left: 0, top: 0, width: " 100%", height: "100%", overflow: "auto", backgroundColor: "rgba(0,0,0,0.6) " }} onClick={(e) => {
+            toggleTrash();
+        }}>
+            <div style={{ margin: "5% auto", width: "50%", padding: "5rem", backgroundColor: "rgba(0,0,0,0.6) " }} onClick={(e) => { e.stopPropagation(); }}>
+                <p className="fs-1  text-white mb-5">¿Desea eliminar el producto?</p>
+                <div className="d-flex justify-content-around">
+                    <button className="btn btn-warning " onClick={() => { setModalTrash(false) }}> Cancelar</button>
+                    <button className="btn btn-danger" onClick={deleteProduct}> Borrar</button>
+                </div>
+            </div>
+        </div>
+    )
     const toggle = () => setModal(!modal);
+
+    const toggleTrash = () => setModalTrash(!modalTrash);
     return (
         <div>
 
             {modal ? modalProduct : null}
             {modalDispo ? modalDisponible : null}
+            {modalTrash ? modalProductTrash : null}
             <h3 className="text-center mb-3" >Menu</h3>
             {/*<label htmlFor="exampleFormControlFile1" className="btn btn-outline-info">Foto del Productos</label>
             <input type="file" className="form-control-file  d-none" id="exampleFormControlFile1" onChange={subirFoto} />*/}
@@ -171,7 +206,7 @@ const MenuComidaAdmin = () => {
                             <div className="card-body">
                                 <h5 className="card-title" >{infoImg.name}</h5>
                                 <p className="card-text d-flex align-items-center"><i className="bi bi-cash-coin"><span className="ms-3">{infoImg.precio}</span></i></p>
-                                <div className="d-flex justify-content-between flex-wrap" >
+                                <div className="d-flex justify-content-around flex-wrap" >
                                     <button className="btn btn-outline-secondary btn-sm " onClick={() => {
                                         setNombre(infoImg.name);
                                         setPrecio(infoImg.precio);
@@ -181,6 +216,7 @@ const MenuComidaAdmin = () => {
                                         toggle();
                                     }}>Editar</button>
                                     <button className={["btn btn-sm", infoImg.disponible ? "btn-outline-info" : "btn-outline-warning"].join(" ")} onClick={(e) => { setModalDispo(!modalDispo); setId(infoImg.id) }}>{infoImg.disponible ? "disponible" : "No disponible"} </button>
+                                    <button className="btn btn-sm col" onClick={() => { setId(infoImg.id); toggleTrash() }}><i className="bi bi-trash-fill" /></button>
                                 </div>
                             </div>
                         </div>
