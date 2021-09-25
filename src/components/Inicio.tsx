@@ -1,9 +1,15 @@
 import React from "react";
+import Express from "./Express"
+import Horario from "./elemens/Horario";
 const Inicio = () => {
     
     return (
-        <div className="container">
-           <h3>Inicio</h3>
+        <div className="container-fluid">
+            <div>
+            <i className="bi bi-calendar-week"></i>
+            </div>
+            <Express/>
+            <Horario/>
         </div>
     )
 }
