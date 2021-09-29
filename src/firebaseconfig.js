@@ -1,8 +1,8 @@
-import firebase from "firebase/app";
-import "firebase/auth";
-import "firebase/firestore";
-import "firebase/analytics";
-import "firebase/storage";
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+import "firebase/compat/firestore";
+import "firebase/compat/analytics";
+import "firebase/compat/storage";
 // Initialize Firebase
 /*const firebaseConfig = {
   apiKey: "AIzaSyCTa9zwGbZqrsbMTkUZf_ILU-k-0sQyd7Y",
