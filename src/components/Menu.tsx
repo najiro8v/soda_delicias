@@ -57,8 +57,6 @@ const Menu = () => {
 											title={<i className="bi bi-gear "></i>}
 										>
 											<NavDropdown.Item onClick={(e) => { history.push("edit") }}>editar</NavDropdown.Item>
-											<NavDropdown.Item onClick={(e) => { history.push("action-2") }}>Seting</NavDropdown.Item>
-											<NavDropdown.Item onClick={(e) => { history.push("action-2") }}>Seting</NavDropdown.Item>
 											<NavDropdown.Divider />
 											<NavDropdown.Item onClick={cerrarSesion}>Cerrar Sesion</NavDropdown.Item>
 										</NavDropdown>
