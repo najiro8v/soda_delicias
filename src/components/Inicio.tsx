@@ -2,14 +2,29 @@ import React from "react";
 import Express from "./Express"
 import Horario from "./elemens/Horario";
 const Inicio = () => {
-    
     return (
         <div className="container-fluid">
-            <div>
-            <i className="bi bi-calendar-week"></i>
+            <Express />
+
+            <div className="container-fluid d-flex flex-wrap mt-3">
+                <div className="col-12 col-sm-12 col-md-8 text-center" >
+                    <h4>Donde Estamos</h4>
+                </div>
             </div>
-            <Express/>
-            <Horario/>
+            <div className="container-fluid d-flex flex-wrap mt-3 align-items-center">
+                <iframe title="Mapa"
+                    non-passive="true"
+                    className="col"
+                    id="google-maps"
+                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d245.60997606553337!2d-84.1548252!3d9.9539474!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8fa0fbe68604d587%3A0x3e4bbf58b85b2de3!2sSoda%20Las%20Delicias!5e0!3m2!1ses-419!2scr!4v1632544813392!5m2!1ses-419!2scr"
+                    style={{ border: 0, height: "22em" }}
+                    loading="lazy">
+                </iframe>
+
+                <div className="d-flex justify-content-end col-12 col-sm-12 col-md-4">
+                    <Horario />
+                </div>
+            </div>
         </div>
     )
 }

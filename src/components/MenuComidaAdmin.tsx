@@ -3,6 +3,7 @@ import { dbNSQL, storageBucket } from "../firebaseconfig";
 const MenuComidaAdmin = () => {
     const [precio, setPrecio] = useState("");
     const [nombre, setNombre] = useState("");
+    const [tipo, setTipo] = useState("");
     const [modal, setModal] = useState(false);
     const [modalDispo, setModalDispo] = useState(false);
     const [img, setImg] = useState(null as any);
@@ -140,37 +141,42 @@ const MenuComidaAdmin = () => {
             </div>
         </div>)
     const modalProduct = (
-        <div style={{ position: "fixed", zIndex: 1, left: 0, top: 0, width: " 100%", height: "100%", overflow: "auto", backgroundColor: "rgba(0,0,0,0.6) " }} onClick={(e) => {
+        <div style={{ position: "fixed", zIndex: 1, left: 0, top: 0, width: "100%", height: "100%", overflow: "auto", backgroundColor: "rgba(0,0,0,0.6) " }} onClick={(e) => {
             toggle();
         }}>
-            <div style={{ margin: "5% auto", width: "50%", padding: "5rem", }} onClick={(e) => { e.stopPropagation(); }}>
-                <form className="form-group" onSubmit={UpdateProduct}>
+                <div style={{ margin: "15% auto", width: "70%", padding: "2.5rem", backgroundColor: "rgba(0,0,0,0.02) " }} onClick={(e) => { e.stopPropagation(); }}>
+                    <form className="form-group" onSubmit={UpdateProduct}>
 
-                    <div className="input-group">
-                        <button className="btn btn-secondary " id="btn-show-psw" type="button"><i className="bi bi-cash-coin"></i></button>
-                        <input className="form-control" type="number" value={precio} placeholder={"Precio"} onChange={(e) => { setPrecio(e.target.value) }} />
-                    </div>
-
-                    <div className="input-group mt-3">
-                        <button className="btn btn-secondary " id="btn-show-psw" type="button"><i className="bi bi-card-text"></i></button>
-                        <input className="form-control" type="text" value={nombre} placeholder={"Nombre del producto"} onChange={(e) => { setNombre(e.target.value) }} />
-                    </div>
-
-                    <div className="input-group mt-3">
                         <div className="input-group">
-                            {
-                                img ? <button className="btn btn-success " id="btn-show-psw" type="button"><i className="bi bi-file-earmark-image"></i></button> :
-                                    <button className="btn btn-secondary " type="button"><i className="bi bi-file-earmark-image"></i></button>
-                            }
-                            <label htmlFor="FormControlFile1" className="btn btn-info col">{img != null ? img[0] ? img[0].name : "Seleccione la foto del producto" : "Seleccione la foto del producto"}</label>
-
+                            <button className="btn btn-secondary " id="btn-show-psw" type="button"><i className="bi bi-cash-coin"></i></button>
+                            <input className="form-control" type="number" value={precio} placeholder={"Precio"} onChange={(e) => { setPrecio(e.target.value) }} />
                         </div>
-                        <input type="file" className="form-control-file  d-none" id="FormControlFile1" onChange={(e: any) => { e.target.files.length !== 0 ? setImg(e.target.files) : setImg(null); }} />
-                    </div>
-                    <input type="submit" className="form-control mt-3 btn btn-secondary" value="Guardar el producto" />
-                    {msgError.length !== 0 ? <div className=" row alert alert-danger mt-5" role="alert">{msgError}</div> : <span></span>}
-                </form>
-            </div>
+
+                        <div className="input-group mt-3">
+                            <button className="btn btn-secondary " id="btn-show-psw" type="button"><i className="bi bi-card-text"></i></button>
+                            <input className="form-control" type="text" value={nombre} placeholder={"Nombre del producto"} onChange={(e) => { setNombre(e.target.value) }} />
+                        </div>
+
+                        <div className="input-group mt-3">
+                            <button className="btn btn-secondary " id="btn-show-psw" type="button"><i className="bi bi-card-text"></i></button>
+                            <input className="form-control" type="text" value={tipo} placeholder={"Tipo de Producto"} onChange={(e) => { setTipo(e.target.value) }} />
+                        </div>
+
+                        <div className="input-group mt-3">
+                            <div className="input-group">
+                                {
+                                    img ? <button className="btn btn-success " id="btn-show-psw" type="button"><i className="bi bi-file-earmark-image"></i></button> :
+                                        <button className="btn btn-secondary " type="button"><i className="bi bi-file-earmark-image"></i></button>
+                                }
+                                <label htmlFor="FormControlFile1" className="btn btn-info col">{img != null ? img[0] ? img[0].name : "Seleccione la foto del producto" : "Seleccione la foto del producto"}</label>
+
+                            </div>
+                            <input type="file" className="form-control-file  d-none" id="FormControlFile1" onChange={(e: any) => { e.target.files.length !== 0 ? setImg(e.target.files) : setImg(null); }} />
+                        </div>
+                        <input type="submit" className="form-control mt-3 btn btn-secondary" value="Guardar el producto" />
+                        {msgError.length !== 0 ? <div className=" row alert alert-danger mt-5" role="alert">{msgError}</div> : <span></span>}
+                    </form>
+                </div>
         </div>
     )
     const modalProductTrash = (
@@ -212,6 +218,7 @@ const MenuComidaAdmin = () => {
                                         setPrecio(infoImg.precio);
                                         setImg([{ name: "IMAGEN ORIGINAL", change: false }]);
                                         setId(infoImg.id);
+                                        setTipo(infoImg.tipo);
                                         setMsgError("")
                                         toggle();
                                     }}>Editar</button>

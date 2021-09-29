@@ -25,7 +25,6 @@ const Login = () => {
                 history.push("/");
             })
             .catch(err => {
-                console.error(err.code);
                 if (err.code === "auth/invalid-email") {
                     setMsgError("Formato de correo electrónico Incorrecto");
                 }
@@ -42,9 +41,8 @@ const Login = () => {
 
     const LoginUser = (e: any) => {
         e.preventDefault();
-        auth.signInWithEmailAndPassword(email, password).then((r: any) => {/*console.log(r.user.uid);*/history.push("/") })
+        auth.signInWithEmailAndPassword(email, password).then((r: any) => {history.push("/") })
             .catch((err) => {
-                console.error(err);
                 if (err.code === "auth/wrong-password") {
                     setMsgError("Contranseña Incorrecta");
                 }
@@ -59,10 +57,6 @@ const Login = () => {
                 }
             })
     }
-    /*
-    auth/invalid-email
-    auth/weak-password
-    */
     return (
         <div className="row mt-5 container-fluid m-0">
             <div className="col"></div>
@@ -89,7 +83,7 @@ const Login = () => {
                                 type="submit"
                                 value="Iniciar Sesión"
                             />
-                            <p className="font-weight-light mt-4 text-center">Si ya tienes cuenta puedes logearte <span className="link" style={{ cursor: "pointer" }} onClick={() => { setLogin(!login) }}><u>Aquí</u></span></p>
+                            <p className="font-weight-light mt-4 text-center">Si ya tienes una cuenta puedes logearte <span className="link" style={{ cursor: "pointer" }} onClick={() => { setLogin(!login) }}><u className="text-primary">Aquí</u></span></p>
                         </div>
                         :
                         <div className="input-group">
@@ -97,7 +91,7 @@ const Login = () => {
                                 className="form-control btn btn-block mt-4 btn-outline-dark w-100"
                                 type="submit"
                                 value="Registrar usuario" />
-                            <p className="font-weight-light mt-4 text-center">Si no tienes cuenta Registrate <span className="link" style={{ cursor: "pointer" }} onClick={() => { setLogin(!login) }}><u>Aquí</u></span></p>
+                            <p className="font-weight-light mt-4 text-center">Si no tienes una cuenta Registrate <span className="link" style={{ cursor: "pointer" }} onClick={() => { setLogin(!login) }}><u className="text-primary">Aquí</u></span></p>
                         </div>
 
                     }

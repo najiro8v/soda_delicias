@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { storageBucket, dbNSQL } from "../firebaseconfig";
 const AddProduct = () => {
     const [precio, setPrecio] = useState("");
+    const [tipo, setTipo] = useState("");
     const [nombre, setNombre] = useState("");
     const [img, setImg] = useState(null as any);
     const [msgError, setMsgError] = useState("");
@@ -27,7 +28,7 @@ const AddProduct = () => {
                 setMsgError("");
                 let Product = {
                     disponible: true,
-                    tipo: null,
+                    tipo: tipo,
                     precio: precio,
                     name: nombre,
                     ImgName: null,
@@ -49,6 +50,7 @@ const AddProduct = () => {
                             setImg(null);
                             setNombre("");
                             setPrecio("");
+                            setTipo("");
                         });
                     });
                 });
@@ -73,6 +75,11 @@ const AddProduct = () => {
                         <div className="input-group mt-3">
                             <button className="btn btn-secondary " id="btn-show-psw" type="button"><i className="bi bi-card-text"></i></button>
                             <input className="form-control" type="text" value={nombre} placeholder={"Nombre del producto"} onChange={(e) => { setNombre(e.target.value) }} />
+                        </div>
+
+                        <div className="input-group mt-3">
+                            <button className="btn btn-secondary " id="btn-show-psw" type="button"><i className="bi bi-card-text"></i></button>
+                            <input className="form-control" type="text" value={tipo} placeholder={"Tipo de Producto"} onChange={(e) => { setTipo(e.target.value) }} />
                         </div>
 
                         <div className="input-group mt-3">

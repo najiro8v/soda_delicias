@@ -6,9 +6,12 @@ import { Link } from "react-router-dom";
 
 
 const MenuAdmin = () => {
-    
+
     return (
         <Fragment>
+            <li className="nav-item ">
+                <Link className="nav-link" to="/express" >Express</Link>
+            </li>
             <li className="nav-item">
                 <Link className="nav-link" to="/addProduct">Productos</Link>
             </li>

@@ -43,7 +43,7 @@ const MenuComida = () => {
 
             <Express />
 
-            <div className="d-flex flex-wrap justify-content-center mt-5 row">
+            <div className=" container-fluid d-flex flex-wrap justify-content-center mt-5 row">
                 {
                     img.map((infoImg: any) =>
                         <div key={infoImg.id} className="card   mt-3 ms-3 col-xm-12 col-12 col-sm-4 col-md-3" >

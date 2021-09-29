@@ -10,6 +10,7 @@ import AddProduct from "./components/AddProduct";
 import MenuComida from "./components/MenuComida";
 import MenuComidaAdmin from "./components/MenuComidaAdmin";
 import Footer from './components/Footer';
+import Contacto from './components/Contacto';
 
 import { auth, dbNSQL } from "./firebaseconfig";
 
@@ -49,6 +50,7 @@ function App() {
           <Route exact path="/" component={Inicio}></Route>
           <Route path="/express" component={usuario !== "Administrador" ? Express : ExpressEdit} />
           <Route path="/login" component={Login}></Route>
+          <Route path="/contacto" component={Contacto}></Route>
           <Route path="/menu" component={usuario !== "Administrador" ? MenuComida : MenuComidaAdmin}></Route>
           {usuario ? usuario !== "Administrador" ?
             <Switch>
@@ -62,7 +64,7 @@ function App() {
           }
         </Switch>
       </Router>
-        <Footer></Footer>
+        <div  style={{marginTop:"9em"}}><Footer></Footer></div>
     </div>
   );
 }

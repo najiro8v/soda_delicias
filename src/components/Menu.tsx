@@ -1,6 +1,6 @@
 import React, { useEffect, useState, Fragment } from "react";
 import { NavDropdown } from "react-bootstrap";
-import { MenuAdmin} from "./elemens/Menus";
+import { MenuAdmin } from "./elemens/Menus";
 import { auth, dbNSQL } from "../firebaseconfig";
 import { useHistory, Link } from "react-router-dom";
 
@@ -14,7 +14,7 @@ const Menu = () => {
 				try {
 					await dbNSQL.collection("user").get().then((data: any) => {
 						let usuario = data.docs.map((element: any) => { let { uid } = element.data(); if (uid === user.uid) { return element.data() } else { return undefined } }).filter((data: any) => data !== undefined)[0];
-						setUsuario(usuario===undefined?null:usuario.tipo);
+						setUsuario(usuario === undefined ? null : usuario.tipo);
 
 					})
 				} catch (e) { console.error(e) }
@@ -44,10 +44,10 @@ const Menu = () => {
 							<li className="nav-item ">
 								<Link className="nav-link" to="/contacto">Contactenos</Link>
 							</li>
-							<li className="nav-item ">
+							{/*<li className="nav-item ">
 								<Link className="nav-link" to="/express" >Express</Link>
-							</li>
-							{usuario  === "Administrador"?<MenuAdmin /> : null}
+	</li>*/}
+							{usuario === "Administrador" ? <MenuAdmin /> : null}
 							<li className="nav-item d-block d-lg-none d-md-none d-xl-none text-light bg-white"  >
 								{
 									usuario ?
