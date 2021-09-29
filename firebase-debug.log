@@ -1,0 +1,68 @@
+[debug] [2021-09-29T03:21:44.713Z] ----------------------------------------------------------------------
+[debug] [2021-09-29T03:21:44.716Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Usuario\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2021-09-29T03:21:44.716Z] CLI Version:   9.18.0
+[debug] [2021-09-29T03:21:44.716Z] Platform:      win32
+[debug] [2021-09-29T03:21:44.716Z] Node Version:  v14.15.4
+[debug] [2021-09-29T03:21:44.717Z] Time:          Tue Sep 28 2021 21:21:44 GMT-0600 (hora estándar central)
+[debug] [2021-09-29T03:21:44.717Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2021-09-29T03:21:44.795Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2021-09-29T03:21:44.795Z] > authorizing via signed-in user (haroldantonio777@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  F:\Xammp\htdocs\soda_delicias
+
+Before we get started, keep in mind:
+
+  * You are initializing within an existing Firebase project directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[info] i  .firebaserc already has a default project, using sodadelcias. 
+[debug] [2021-09-29T03:21:57.319Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/sodadelcias [none]
+[debug] [2021-09-29T03:21:57.921Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/sodadelcias 200
+[debug] [2021-09-29T03:21:57.921Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/sodadelcias {"projectId":"sodadelcias","projectNumber":"1068321241552","displayName":"SodaDelicias","name":"projects/sodadelcias","resources":{"hostingSite":"sodadelcias","storageBucket":"sodadelcias.appspot.com","locationId":"us-central"},"state":"ACTIVE"}
+[info] 
+=== Hosting Setup
+[info] 
+[info] Your public directory is the folder (relative to your project directory) that
+[info] will contain Hosting assets to be uploaded with firebase deploy. If you
+[info] have a build process for your assets, use your build's output directory.
+[info] 
+[debug] [2021-09-29T03:22:14.878Z] ----------------------------------------------------------------------
+[debug] [2021-09-29T03:22:14.880Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Usuario\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2021-09-29T03:22:14.880Z] CLI Version:   9.18.0
+[debug] [2021-09-29T03:22:14.880Z] Platform:      win32
+[debug] [2021-09-29T03:22:14.880Z] Node Version:  v14.15.4
+[debug] [2021-09-29T03:22:14.881Z] Time:          Tue Sep 28 2021 21:22:14 GMT-0600 (hora estándar central)
+[debug] [2021-09-29T03:22:14.881Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2021-09-29T03:22:14.947Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2021-09-29T03:22:14.947Z] > authorizing via signed-in user (haroldantonio777@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  F:\Xammp\htdocs\soda_delicias
+
+Before we get started, keep in mind:
+
+  * You are initializing within an existing Firebase project directory
+
