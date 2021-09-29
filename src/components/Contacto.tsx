@@ -53,7 +53,7 @@ const Contacto = () => {
                         </p>
                         <p className="d-none d-md-block h2 m-0">
                             <i className="bi bi-map me-3"></i>
-                            Nuestra sucursal principal de comida rápida está frente a la estación de la polícia de Lomas, de la entrada la iglesia a mano izquierda 200mt Norte, 50mt Oeste.
+                            Nuestra sucursal principal de comida rápida está frente a la estación de la polícia de Lomas, de la entrada la iglesia Bautista 100mt Norte, 10mt Oeste.
                         </p>
 
                     </div>
