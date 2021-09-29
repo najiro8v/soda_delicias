@@ -1,8 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { dbNSQL } from "../firebaseconfig";
+import { auth,dbNSQL } from "../firebaseconfig";
 const Express = (props?: any) => {
     const [imgs, setImgs] = useState([] as any);
     const [imgP, setImgP] = useState({ name: "", precio: "", url: "", id: "" });
+    
+  const [usuario, setUsuario] = useState(null as any);
+    useEffect(() => {
+        auth.onAuthStateChanged(async (user) => {
+          if (user) {
+            await dbNSQL.collection("user").get().then((data: any) => {
+              let usuario = data.docs.map((element: any) => { let { uid } = element.data(); if (uid === user.uid) { return element.data() } else { return undefined } }).filter((data: any) => data !== undefined)[0];
+              setUsuario(usuario === undefined ? null : usuario.tipo);
+            })
+          }
+          else {
+            setUsuario(null);
+          }
+        })
+      }, [])
     useEffect(() => {
         const getCarousel = async () => {
             try {
