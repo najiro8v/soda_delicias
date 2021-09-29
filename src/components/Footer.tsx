@@ -3,7 +3,7 @@ import Yourpng from "../img/logo.png";
 const Footer = () => {
     return (
         <div
-            style={{ backgroundColor: "#fbad31", padding: "0.5rem",bottom:0,right:0,left:0,position:"fixed"}}
+            style={{ backgroundColor: "#fbad31", padding: "0.5rem"}}
             className=" d-flex flex-wrap align-items-center justify-content-around container-fluid mt-10">
             <div className="col-12 col-sm-4">
                 <h4 className="text-white" >© Soda las Delicias</h4>
