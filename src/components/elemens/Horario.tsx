@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { dbNSQL } from "../../firebaseconfig";
 import { Dropdown } from "react-bootstrap";
-const semana = ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'];
+const semana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
 const Horario = () => {
     const [horario, setHorario] = useState([] as any)
     const [estado, setEstado] = useState(false)

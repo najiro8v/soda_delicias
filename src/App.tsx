@@ -64,7 +64,7 @@ function App() {
           }
         </Switch>
       </Router>
-        <div  style={{marginTop:"9em"}}><Footer></Footer></div>
+        <div  style={{marginTop:"3em"}} ><Footer></Footer></div>
     </div>
   );
 }

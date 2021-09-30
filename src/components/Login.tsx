@@ -83,7 +83,7 @@ const Login = () => {
                                 type="submit"
                                 value="Iniciar Sesión"
                             />
-                            <p className="font-weight-light mt-4 text-center">Si ya tienes una cuenta puedes logearte <span className="link" style={{ cursor: "pointer" }} onClick={() => { setLogin(!login) }}><u className="text-primary">Aquí</u></span></p>
+                            <p className="font-weight-light mt-4 text-center">Si no tienes una cuenta Registrate <span className="link" style={{ cursor: "pointer" }} onClick={() => { setLogin(!login) }}><u className="text-primary">Aquí</u></span></p>
                         </div>
                         :
                         <div className="input-group">
@@ -91,7 +91,7 @@ const Login = () => {
                                 className="form-control btn btn-block mt-4 btn-outline-dark w-100"
                                 type="submit"
                                 value="Registrar usuario" />
-                            <p className="font-weight-light mt-4 text-center">Si no tienes una cuenta Registrate <span className="link" style={{ cursor: "pointer" }} onClick={() => { setLogin(!login) }}><u className="text-primary">Aquí</u></span></p>
+                            <p className="font-weight-light mt-4 text-center">Si ya tienes una cuenta puedes logearte <span className="link" style={{ cursor: "pointer" }} onClick={() => { setLogin(!login) }}><u className="text-primary">Aquí</u></span></p>
                         </div>
 
                     }

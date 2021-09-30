@@ -4,11 +4,11 @@ const Footer = () => {
     return (
         <div
             style={{ backgroundColor: "#fbad31", padding: "0.5rem"}}
-            className=" d-flex flex-wrap align-items-center justify-content-around container-fluid mt-10">
-            <div className="col-12 col-sm-4">
-                <h4 className="text-white" >© Soda las Delicias</h4>
+            className=" d-flex flex-wrap align-items-center justify-content-center container-fluid mt-10">
+            <div className="col-12 col-sm-4 text-center">
+                <h4 className="text-white col-12" >© Soda las Delicias</h4>
             </div>
-            <div className="col d-flex justify-content-center">
+            <div className="col d-flex justify-content-center mb-2">
                 <img src={Yourpng} alt="Soda las Delicias" />
 
             </div>

@@ -41,7 +41,7 @@ const Express = (props?: any) => {
                             }
                             {imgP ? <div className="carousel-caption d-block" style={{ backgroundColor: "#22222233" }} >
                                 <h3 className="d-block" style={{ color: "#eee" }}>{imgP.name}</h3>
-                                <h4 className="d-none d-md-block" style={{ color: "#eee" }}>{imgP.precio}</h4>
+                                <h4 className="d-none d-md-block" style={{ color: "#eee" }}>₡ {imgP.precio}</h4>
                             </div> : null}
                         </div>
 
@@ -62,7 +62,7 @@ const Express = (props?: any) => {
                                     {img.name.length !== 0 || img.precio.length !== 0 ?
                                         <div className="carousel-caption  d-sm-block d-block d-md-block  d-sm-block" style={{ backgroundColor: "#22222233" }}>
                                             <h3 className="d-block" style={{ color: "#eee" }}>{img.name}</h3>
-                                            <h4 className="d-none d-md-block "style={{ color: "#eee" }}>{img.precio}</h4>
+                                            <h4 className="d-none d-md-block "style={{ color: "#eee" }}>₡ {img.precio}</h4>
                                         </div> : null}
                                 </div>
                             ))

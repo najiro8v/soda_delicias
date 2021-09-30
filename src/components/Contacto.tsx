@@ -45,11 +45,11 @@ const Contacto = () => {
                     <div className="col-12 col-md-6 m-1">
                         <p className="d-block d-sm-none h6 m-0">
                             <i className="bi bi-map me-3"></i>
-                            Nuestra sucursal principal de comida rápida está frente a la estación de la polícia de Lomas, de la entrada la iglesia a mano izquierda 200mt Norte, 50mt Oeste.
+                            Nuestra sucursal principal de comida rápida está frente a la estación de la polícia de Lomas, de la entrada la iglesia Bautista 100mt Norte, 10mt Oeste.
                         </p>
                         <p className="d-none d-sm-block d-md-none h3 m-0">
                             <i className="bi bi-map me-3"></i>
-                            Nuestra sucursal principal de comida rápida está frente a la estación de la polícia de Lomas, de la entrada la iglesia a mano izquierda 200mt Norte, 50mt Oeste.
+                            Nuestra sucursal principal de comida rápida está frente a la estación de la polícia de Lomas, de la entrada la iglesia Bautista 100mt Norte, 10mt Oeste.
                         </p>
                         <p className="d-none d-md-block h2 m-0">
                             <i className="bi bi-map me-3"></i>
@@ -109,19 +109,19 @@ const Contacto = () => {
                     </div>
                     <div className="col-12 col-md-6 m-1">
                         <p className="d-block d-sm-none h6 m-0">
-                            Puedes pedir tu pedido al número <b>63604906</b> o enviarnos un mensaje a nuestro whatsapp
+                            Puedes pedir tu pedido al número <b>63604906</b> o enviarnos un mensaje a nuestro WhatsApp
                             <a title="Whatsapp" href="https://api.whatsapp.com/send?phone=50663604906" rel="noreferrer" target="_blank" className=" ms-2 pe-auto btn bg-success btn-small"  >
                             <i className="bi bi-whatsapp text-white "></i>
                         </a>
                         </p>
                         <p className="d-none d-sm-block  d-md-none h3 m-0">
-                            Puedes pedir tu pedido al número <b>63604906</b> o enviarnos un mensaje a nuestro whatsapp
+                            Puedes pedir tu pedido al número <b>63604906</b> o enviarnos un mensaje a nuestro WhatsApp
                             <a title="Whatsapp" href="https://api.whatsapp.com/send?phone=50663604906" rel="noreferrer" target="_blank" className=" ms-2 pe-auto  btn bg-success">
                             <i className="bi bi-whatsapp text-white "></i>
                         </a>
                         </p>
                         <p className="d-none d-md-block h2 m-0">
-                            Puedes pedir tu pedido al número <b>63604906</b> o enviarnos un mensaje a nuestro whatsapp
+                            Puedes pedir tu pedido al número <b>63604906</b> o enviarnos un mensaje a nuestro WhatsApp
                             <a title="Whatsapp" href="https://api.whatsapp.com/send?phone=50663604906" rel="noreferrer" target="_blank" className=" ms-2 pe-auto btn bg-success">
                             <i className="bi bi-whatsapp text-white "></i>
                         </a>

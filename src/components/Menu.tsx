@@ -42,7 +42,7 @@ const Menu = () => {
 								<Link className="nav-link" to="/Menu">Menú</Link>
 							</li>
 							<li className="nav-item ">
-								<Link className="nav-link" to="/contacto">Contactenos</Link>
+								<Link className="nav-link" to="/contacto">Contáctenos</Link>
 							</li>
 							{/*<li className="nav-item ">
 								<Link className="nav-link" to="/express" >Express</Link>

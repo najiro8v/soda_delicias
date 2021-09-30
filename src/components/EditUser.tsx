@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { dbNSQL, auth } from "../firebaseconfig";
 const EditUser = () => {
+    const history = useHistory();
     const [id, setId] = useState("");
     const [usuario, setUsuario] = useState(null as any);
     const [edad, setEdad] = useState("");
@@ -15,16 +17,19 @@ const EditUser = () => {
         try {
             let { uid,tipo } = usuario;
             let Product = {
-                uid:uid,
-                tipo:tipo,
-                email:email,
-                numero: numero,
-                nombre: nombre,
-                edad: edad,
-                dirrecion: dirrecion,
-                img:img
+                uid:uid||"",
+                tipo:tipo||"",
+                email:email||"",
+                numero: numero||"",
+                nombre: nombre||"",
+                edad: edad||"",
+                dirrecion: dirrecion||"",
+                img:img||""
             }
-            dbNSQL.collection("user").doc(id).set(Product);
+            dbNSQL.collection("user").doc(id).set(Product).then((e:any)=>{
+                
+                history.push("/")
+            });
         } catch (e) { console.error(e); }
 
     }
@@ -93,7 +98,7 @@ const EditUser = () => {
                             </div>
                             <input type="file" className="form-control-file  d-none" id="FormControlFile1" />{/**onChange={(e: any) => { e.target.files.length !== 0 ? setImg(e.target.files) : setImg(null); }} */}
                         </div>
-                        <input type="submit" className="form-control mt-3 btn btn-outline-secondary" value="Guardar el producto" />
+                        <input type="submit" className="form-control mt-3 btn btn-outline-secondary" value="Guardar los Cambios" />
                     </form>
                 </div>
                 <div className="col"></div>
