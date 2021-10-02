@@ -1,12 +1,22 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { storageBucket, dbNSQL } from "../firebaseconfig";
 const AddProduct = () => {
     const [precio, setPrecio] = useState("");
     const [tipo, setTipo] = useState("");
     const [nombre, setNombre] = useState("");
+    const [tipos, setTipos] = useState([] as any);
     const [img, setImg] = useState(null as any);
     const [msgError, setMsgError] = useState("");
+    useEffect(() => {
+        const tipos = async () => {
+            await dbNSQL.collection("Otros").doc("Tipos").get().then((e)=>{
+                setTipos(Object.keys(e.data()||{}));
+            })
+        }
+        tipos();
+    }, [])
+
     const subirFoto = async (e: any) => {
         e.preventDefault();
         let pass = false;
@@ -69,7 +79,7 @@ const AddProduct = () => {
 
                         <div className="input-group">
                             <button className="btn btn-secondary " id="btn-show-psw" type="button"><i className="bi bi-cash-coin"></i></button>
-                            <input className="form-control" type="number" value={precio} placeholder={"Precio"} onChange={(e) => { setPrecio(e.target.value) }} />
+                            <input className="form-control" type="number" min={0} value={precio} placeholder={"Precio"} onChange={(e) => { setPrecio(e.target.value) }} />
                         </div>
 
                         <div className="input-group mt-3">
@@ -79,7 +89,14 @@ const AddProduct = () => {
 
                         <div className="input-group mt-3">
                             <button className="btn btn-secondary " id="btn-show-psw" type="button"><i className="bi bi-card-text"></i></button>
-                            <input className="form-control" type="text" value={tipo} placeholder={"Tipo de Producto"} onChange={(e) => { setTipo(e.target.value) }} />
+                            <select className="form-select" value={tipo} placeholder={"Tipo de Producto"} onChange={(e) => { setTipo(e.target.value) }} >
+                            <option selected>Seleccione un tipo</option>
+                                {
+                                    tipos.map((e:any)=>(
+                                        <option key={e}>{e}</option>)
+                                    )
+                                }
+                            </select>
                         </div>
 
                         <div className="input-group mt-3">
