@@ -23,7 +23,10 @@ const MenuComida = () => {
                     });
                     let lista = alpha.filter((card: any) => card.disponible);
                     lista.forEach((e: any) => {
+                        console.log(e.tipo+"-"+e.name)
                         Titulos[e.tipo] = [...Titulos[e.tipo], e];
+                        
+
                     });
                     for (const propiedad in Titulos) {
                         if (Titulos[propiedad].length > 1) {
@@ -73,7 +76,7 @@ const MenuComida = () => {
                                     </div>
                                 </div>) :
                                     !(openModal[openModal.indexOf(group[0].tipo) + 1]) && (index > 3 && 4 >= index) ? (
-                                        <div key={Math.random()} className="card ms-3 mt-3 col-md-2 align-self-end card-small " style={{cursor:"pointer"}}  onClick={(e) => { const cloneArray = [...openModal]; cloneArray[cloneArray.indexOf(group[0].tipo) + 1] = (cloneArray[cloneArray.indexOf(group[0].tipo) + 1]) ? false : true; setOpenModal(cloneArray) }}>
+                                        <div key={Math.random()} className="card ms-3 mt-3 col-md-2 align-self-end card-small " style={{ cursor: "pointer" }} onClick={(e) => { const cloneArray = [...openModal]; cloneArray[cloneArray.indexOf(group[0].tipo) + 1] = (cloneArray[cloneArray.indexOf(group[0].tipo) + 1]) ? false : true; setOpenModal(cloneArray) }}>
                                             <div className="card-body py-1">
                                                 <h5 className="card-title text-center stretched-link p-0" ><i className="bi bi-three-dots p-0"></i></h5>
                                             </div>

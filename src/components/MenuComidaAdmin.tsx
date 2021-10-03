@@ -102,6 +102,7 @@ const MenuComidaAdmin = () => {
                 let Product = {
                     precio: precio,
                     name: nombre,
+                    tipo:tipo
                 };
                 await dbNSQL.collection("Product").doc(id).update(Product).then(async () => {
                     if (file.change === undefined) {
