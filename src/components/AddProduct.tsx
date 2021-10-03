@@ -7,6 +7,7 @@ const AddProduct = () => {
     const [nombre, setNombre] = useState("");
     const [tipos, setTipos] = useState([] as any);
     const [img, setImg] = useState(null as any);
+    const [pathImg, setPathImg] = useState("");
     const [msgError, setMsgError] = useState("");
     useEffect(() => {
         const tipos = async () => {
@@ -61,6 +62,7 @@ const AddProduct = () => {
                             setNombre("");
                             setPrecio("");
                             setTipo("");
+                            setPathImg("");
                         });
                     });
                 });
@@ -108,7 +110,7 @@ const AddProduct = () => {
                                 <label htmlFor="FormControlFile1" className="btn btn-outline-info col">{img != null ? img[0] ? img[0].name : "Seleccione la foto del producto" : "Seleccione la foto del producto"}</label>
 
                             </div>
-                            <input type="file" className="form-control-file  d-none" id="FormControlFile1" onChange={(e: any) => { e.target.files.length !== 0 ? setImg(e.target.files) : setImg(null); }} />
+                            <input type="file" className="form-control-file  d-none" id="FormControlFile1" value={pathImg} onChange={(e: any) => {if(e.target.files.length !== 0){setImg(e.target.files); setPathImg(e.target.value) } else{ setImg(null);setPathImg( e.target.value);}}} />
                         </div>
                         <input type="submit" className="form-control mt-3 btn btn-outline-secondary" value="Guardar el producto" />
                     </form>
