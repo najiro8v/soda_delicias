@@ -16,12 +16,12 @@ const Menu = () => {
 					await dbNSQL.collection("user").get().then((data: any) => {
 						let usuario = data.docs.map((element: any) => { let { uid } = element.data(); if (uid === user.uid) { return element.data() } else { return undefined } }).filter((data: any) => data !== undefined)[0];
 						setUsuario(usuario === undefined ? null : usuario.tipo);
-
 					})
 				} catch (e) { console.error(e) }
 			}
 		})
 	}, [])
+
 	const cerrarSesion = () => {
 		auth.signOut();
 		setUsuario(null);
@@ -51,12 +51,13 @@ const Menu = () => {
 							</li>
 							{/*<li className="nav-item ">
 								<Link className="nav-link" to="/express" >Express</Link>
-	</li>*/}
+								</li>*/}
 							{usuario === "Administrador" ? <MenuAdmin /> : null}
 							<li className="nav-item d-block d-lg-none d-md-none d-xl-none text-light bg-white" >
 								<i className={"bi bi-" + iCart + " text-secondary"}
 									onMouseEnter={(e) => { e.preventDefault(); hoverCart(e) }}
-									onMouseLeave={(e) => { e.preventDefault(); hoverCart(e) }}></i>
+									onMouseLeave={(e) => { e.preventDefault(); hoverCart(e) }}
+									onClick={() => { history.push("/carrito") }}></i>
 							</li>
 							<li className="nav-item d-block d-lg-none d-md-none d-xl-none text-light bg-white"  >
 								{
@@ -76,10 +77,6 @@ const Menu = () => {
 										>Login</span>
 								}
 							</li>
-
-
-
-
 						</ul>
 
 					</div>
@@ -88,6 +85,7 @@ const Menu = () => {
 					<i className={"bi bi-" + iCart + " text-secondary"}
 						onMouseEnter={(e) => { e.preventDefault(); hoverCart(e) }}
 						onMouseLeave={(e) => { e.preventDefault(); hoverCart(e) }}
+						onClick={() => { history.push("/carrito") }}
 					></i>
 					{
 						usuario ?
@@ -108,8 +106,6 @@ const Menu = () => {
 			</div>
 
 		</Fragment >
-
-
 	);
 };
 

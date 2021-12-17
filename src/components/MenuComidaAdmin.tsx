@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { dbNSQL, storageBucket } from "../firebaseconfig";
 const MenuComidaAdmin = () => {
+    
     const [precio, setPrecio] = useState("");
     const [nombre, setNombre] = useState("");
     const [tipo, setTipo] = useState("");

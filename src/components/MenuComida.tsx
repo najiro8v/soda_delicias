@@ -1,15 +1,13 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { dbNSQL } from "../firebaseconfig";
 import Express from "./Express";
-import Card from "./elemens/Card";
-const MenuComida = () => {
+const MenuComida = (props: any) => {
+    let { compras, editCompras } = props;
     const [img, setImg] = useState([] as any);
     const [openModal, setOpenModal] = useState([] as any);
     const [productos, setProductos] = useState([] as any);
-    const [id, setId] = useState(null as any);
-
     useEffect(() => {
-
+        setProductos(JSON.parse(localStorage.getItem("carrito") || "[]"))
         const readData = async () => {
             try {
                 const TiposO = await dbNSQL.collection("Otros").doc("Tipos").get().then((e) => {
@@ -53,14 +51,17 @@ const MenuComida = () => {
         }
         readData();
     }, [])
+    useEffect(() => {
+        localStorage.setItem("carrito", JSON.stringify(productos));
+    }, [productos])
+
+    const AddCarrito = (id:"") => {
+        editCompras([...compras, id]);
+    }
+
     return (
         <div className="container-fluid">
-            {/*<h3 className="text-center mb-3" >Menu</h3>*/}
-            {/*<label htmlFor="exampleFormControlFile1" className="btn btn-outline-info">Foto del Productos</label>
-            <input type="file" className="form-control-file  d-none" id="exampleFormControlFile1" onChange={subirFoto} />*/}
-
             <Express />
-
             <div className=" col-12">
                 {
                     img.map((group: any) => {
@@ -72,11 +73,7 @@ const MenuComida = () => {
                                         <img src={infoImg.url} className="card-img-top mt-1" alt="Imagen del producto" title="prueva" />
                                         <div className="card-body">
                                             <h5 className="card-title" >{infoImg.name}</h5>
-                                            <p className="card-text d-flex align-items-center"><i className="bi bi-cash-coin"><span className="ms-3 me-3">{infoImg.precio}</span></i><i role="button" className=" bi bi-cart-plus-fill" onClick={(e) => {
-                                                setId(infoImg.id); let temp = productos[0] == null && productos.length === 1 ? [id] : [...productos, id];
-                                                console.log(temp)
-                                                setProductos(temp)
-                                            }}></i></p>
+                                            <p className="card-text d-flex align-items-center"><i className="bi bi-cash-coin"><span className="ms-3 me-3">{infoImg.precio}</span></i><i role="button" className=" bi bi-cart-plus-fill" onClick={() => { AddCarrito(infoImg.id) }}></i></p>
                                         </div>
                                     </div>) :
                                     !(openModal[openModal.indexOf(group[0].tipo) + 1]) && (index > 3 && 4 >= index) ? (
@@ -91,11 +88,7 @@ const MenuComida = () => {
                                                     <img src={infoImg.url} className="card-img-top mt-1" alt="Imagen del producto" />
                                                     <div className="card-body">
                                                         <h5 className="card-title" >{infoImg.name}</h5>
-                                                        <p className="card-text d-flex align-items-center"><i className="bi bi-cash-coin"><span className="ms-3 me-3">{infoImg.precio}</span></i> <i role="button" className=" bi bi-cart-plus-fill" onClick={(e) => {
-                                                            setId(infoImg.id); let temp = productos[0] == null && productos.length === 1 ? [id] : [...productos, id];
-                                                            console.log(temp)
-                                                            setProductos(temp)
-                                                        }}></i></p>
+                                                        <p className="card-text d-flex align-items-center"><i className="bi bi-cash-coin"><span className="ms-3 me-3">{infoImg.precio}</span></i> <i role="button" className=" bi bi-cart-plus-fill" onClick={() => { AddCarrito(infoImg.id)  }}></i></p>
                                                     </div>
                                                 </div>
                                                 <div key={Math.random()} className="card ms-3 mt-3 col-md-2 align-self-end card-small" style={{ cursor: "pointer" }} onClick={(e) => { const cloneArray = [...openModal]; cloneArray[cloneArray.indexOf(group[0].tipo) + 1] = (cloneArray[cloneArray.indexOf(group[0].tipo) + 1]) ? false : true; setOpenModal(cloneArray) }}>
@@ -109,11 +102,7 @@ const MenuComida = () => {
                                                     <img src={infoImg.url} className="card-img-top mt-1" alt="Imagen del producto" />
                                                     <div className="card-body">
                                                         <h5 className="card-title" >{infoImg.name}</h5>
-                                                        <p className="card-text d-flex align-items-center"><i className="bi bi-cash-coin"><span className="ms-3 me-3 ">{infoImg.precio}</span></i><i role="button" className=" bi bi-cart-plus-fill" onClick={(e) => {
-                                                            setId(infoImg.id); let temp = productos[0] == null && productos.length === 1 ? [id] : [...productos, id];
-                                                            console.log(temp)
-                                                            setProductos(temp)
-                                                        }}></i></p>
+                                                        <p className="card-text d-flex align-items-center"><i className="bi bi-cash-coin"><span className="ms-3 me-3 ">{infoImg.precio}</span></i><i role="button" className=" bi bi-cart-plus-fill" onClick={() => { AddCarrito(infoImg.id)  }}></i></p>
                                                     </div>
                                                 </div>)
                                             : null
@@ -128,29 +117,3 @@ const MenuComida = () => {
 }
 
 export default MenuComida;
-
-/*
-<div key={infoImg.id} className="card ms-3 mt-3 col-12 col-sm-3 col-md-2" >
-    <img src={infoImg.url} className="card-img-top mt-1" alt="Imagen del producto" />
-    <div className="card-body">
-        <h5 className="card-title" >{infoImg.name}</h5>
-        <p className="card-text d-flex align-items-center"><i className="bi bi-cash-coin"><span className="ms-3 me-3">{infoImg.precio}</span></i> <i role="button" className=" bi bi-cart-plus-fill" onClick={(e) => {
-            setId(infoImg.id); let temp = productos[0] == null && productos.length === 1 ? [id] : [...productos, id];
-            console.log(temp)
-            setProductos(temp)
-        }}></i></p>
-    </div>
-</div>
-*/
-
-/*<div key={infoImg.id} className="card ms-3 mt-3 col-12 col-sm-3 col-md-2"  >
-    <img src={infoImg.url} className="card-img-top mt-1" alt="Imagen del producto" />
-    <div className="card-body">
-        <h5 className="card-title" >{infoImg.name}</h5>
-        <p className="card-text d-flex align-items-center"><i className="bi bi-cash-coin"><span className="ms-3 me-3 ">{infoImg.precio}</span></i><i role="button" className=" bi bi-cart-plus-fill" onClick={(e) => {
-            setId(infoImg.id); let temp = productos[0] == null && productos.length === 1 ? [id] : [...productos, id];
-            console.log(temp)
-            setProductos(temp)
-        }}></i></p>
-    </div>
-</div>*/
