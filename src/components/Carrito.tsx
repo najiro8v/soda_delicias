@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { dbNSQL } from "../firebaseconfig";
 import CardComida from "./elemens/CardComida"
+import { useHistory } from "react-router-dom";
 const Carrito = (props: any) => {
     let { compras, editCompras } = props
     const [img, setImg] = useState([] as any);
+    const [express, setExpress] = useState(false);
     const [suma, setSuma] = useState(0);
-    
+    const history = useHistory();
     useEffect(() => {
         const repetidos = () => {
             let arrayPedidos = [...compras];
@@ -67,7 +69,15 @@ const Carrito = (props: any) => {
         }
         readData();
     }, [compras])
-
+    const mensajePedido = () => {
+        let text = "Pedido" + (express ? " con express" : " para recoger en el local"), jump = "%0A";
+        img.forEach((carta: any) => {
+            text += jump + "- " + carta.canti + " " + carta.name;
+        });
+        text += jump +(express?"precio a pagar _sin express incluido_":"precio a pagar")+ " : *"+suma+".00* ₡";
+        
+        window.open("https://api.whatsapp.com/send?phone=50662002879&text=" + text, "_blank");
+    }
     return (
         <div className="container-fluid">
             <h3 className="text-center">Mi Carrito</h3>
@@ -79,9 +89,20 @@ const Carrito = (props: any) => {
                     ))
                 }
             </div>
-            <div className="d-flex justify-content-end">
-                <h3>Total {suma}</h3>
-            </div>
+            {suma <= 0 ? <div style={{ height: "60vh" }} className="d-flex align-items-end justify-content-end">
+                <div><button className="btn btn-dark" onClick={() => { history.push("/menu"); }}>
+                    Comprar productos
+                </button></div>
+            </div> :
+                <div className="d-flex justify-content-end mt-3 align-items-center">
+                    <div className="form-check form-switch d-flex align-items-center">
+                        <input className="form-check-input " type="checkbox" role="switch" id="flexSwitchCheckDefault" onClick={()=>{setExpress(!express)}}/>
+                        <label className=" me-3 ms-3 h1 form-check-label" htmlFor="flexSwitchCheckDefault"><i className={"bi bi-bicycle text-"+(express?"dark":"secondary")}></i></label>
+                    </div>
+                    <h3 className="ms-5 d-flex align-items-center"><i className="bi bi-cash-coin"> Total :<span className="ms-2 me-3">{suma}.00 ₡</span></i></h3>
+                    <button className="btn btn-dark" onClick={mensajePedido}> <i className="bi bi-cart4"></i></button>
+                </div>
+            }
         </div>
     )
 }

@@ -1,6 +1,6 @@
 import React from "react";
 
-const CardComida = (props: any) => {
+const CardComidaMenu = (props:any) => {
 
     let { compras, editCompras, data } = props;
     function eliminar() {
@@ -38,4 +38,4 @@ const CardComida = (props: any) => {
     )
 }
 
-export default CardComida;
+export default CardComidaMenu;
