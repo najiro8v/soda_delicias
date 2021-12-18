@@ -76,7 +76,7 @@ const Carrito = (props: any) => {
         });
         text += jump +(express?"precio a pagar _sin express incluido_":"precio a pagar")+ " : *"+suma+".00* ₡";
         
-        window.open("https://api.whatsapp.com/send?phone=50662002879&text=" + text, "_blank");
+        window.open("https://api.whatsapp.com/send?phone=50663604906&text=" + text, "_blank");
     }
     return (
         <div className="container-fluid">
@@ -94,13 +94,13 @@ const Carrito = (props: any) => {
                     Comprar productos
                 </button></div>
             </div> :
-                <div className="d-flex justify-content-end mt-3 align-items-center">
+                <div className="d-flex justify-content-end mt-3 align-items-center flex-wrap flex-column flex-md-row" >
                     <div className="form-check form-switch d-flex align-items-center">
                         <input className="form-check-input " type="checkbox" role="switch" id="flexSwitchCheckDefault" onClick={()=>{setExpress(!express)}}/>
                         <label className=" me-3 ms-3 h1 form-check-label" htmlFor="flexSwitchCheckDefault"><i className={"bi bi-bicycle text-"+(express?"dark":"secondary")}></i></label>
                     </div>
-                    <h3 className="ms-5 d-flex align-items-center"><i className="bi bi-cash-coin"> Total :<span className="ms-2 me-3">{suma}.00 ₡</span></i></h3>
-                    <button className="btn btn-dark" onClick={mensajePedido}> <i className="bi bi-cart4"></i></button>
+                    <h3 className="mt-3 md-mt-0 ms-5 d-flex align-items-center"><i className="bi bi-cash-coin"> Total :<span className="ms-2 me-3">{suma}.00 ₡</span></i></h3>
+                    <button className="mt-3 md-mt-0 btn btn-dark" onClick={mensajePedido}> <i className="bi bi-cart4"></i></button>
                 </div>
             }
         </div>
