@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { dbNSQL } from "../firebaseconfig";
 import CardComida from "./elemens/CardComida"
 import { useHistory } from "react-router-dom";
+import "axios";
+import axios from "axios";
 const Carrito = (props: any) => {
     let { compras, editCompras } = props
     const [img, setImg] = useState([] as any);
@@ -9,7 +11,8 @@ const Carrito = (props: any) => {
     const [suma, setSuma] = useState(0);
     const history = useHistory();
     useEffect(() => {
-        const repetidos = () => {
+        /*const repetidos = () => {
+            
             let arrayPedidos = [...compras];
             let arraytempo = [], arrayId = [];
             for (let i = 0; i < arrayPedidos.length; i++) {
@@ -67,8 +70,25 @@ const Carrito = (props: any) => {
                 console.error(error);
             }
         }
-        readData();
-    }, [compras])
+        readData();*/
+        const sendData=async ()=>{
+            await fetch(`${process.env.REACT_APP_IP_API}products/`,{
+                    method:"GET",
+                    headers:{'Content-Type': 'application/json'},
+                    redirect:'follow'
+                }).then(async(promise:any)=>{
+                   return promise;
+                }).then(async(data:any)=>{
+                    console.log(await data.json());
+                })
+                .catch((promise:any)=>{
+                    console.log(promise)
+                    console.log("--error--")
+                })
+                console.log("@")
+        }
+        sendData();
+    }, [/*compras*/])
     const mensajePedido = () => {
         let text = "Pedido" + (express ? " con express" : " para recoger en el local"), jump = "%0A";
         img.forEach((carta: any) => {
