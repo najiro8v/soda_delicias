@@ -13,6 +13,7 @@ import Footer from './components/Footer';
 import Contacto from './components/Contacto';
 import Carrito from "./components/Carrito";
 import { auth, dbNSQL } from "./firebaseconfig";
+import "process";
 
 function App() {
   const [usuario, setUsuario] = useState(null as any);
