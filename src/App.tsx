@@ -24,7 +24,7 @@ function App() {
         await dbNSQL.collection("user").get().then((data: any) => {
           let usuario = data.docs.map((element: any) => { let { uid } = element.data(); if (uid === user.uid) { return element.data() } else { return undefined } }).filter((data: any) => data !== undefined)[0];
           setUsuario(usuario === undefined ? null : usuario.tipo);
-          window.localStorage.setItem("userType",usuario)
+          window.localStorage.setItem("userType", usuario)
         })
       }
       else {
@@ -34,17 +34,6 @@ function App() {
   }, [])
   return (
     <div className="container-fluid col-12">
-      {/*  <Menu></Menu>
-      <Router>
-        <Switch>
-          <Route exact path="/">
-          <Express></Express>
-          </Route> 
-          <Route  path="/express">
-          <Express></Express>
-          </Route> 
-        </Switch>
-      </Router>*/}
       <Router>
         <Menu></Menu>
 
@@ -53,7 +42,7 @@ function App() {
           <Route path="/express" component={usuario !== "Administrador" ? Express : ExpressEdit} />
           <Route path="/login" component={Login}></Route>
           <Route path="/contacto" component={Contacto}></Route>
-          <Route path="/menu" >{usuario !== "Administrador" ? <MenuComida  compras={compras} editCompras={setCompras} />: <MenuComidaAdmin/>}</Route>
+          <Route path="/menu" >{usuario !== "Administrador" ? <MenuComida compras={compras} editCompras={setCompras} /> : <MenuComidaAdmin />}</Route>
           <Route path="/carrito" ><Carrito compras={compras} editCompras={setCompras}></Carrito> </Route>
 
           {usuario ? usuario !== "Administrador" ?
@@ -68,7 +57,7 @@ function App() {
           }
         </Switch>
       </Router>
-        <div  style={{marginTop:"3em"}} ><Footer></Footer></div>
+      <div style={{ marginTop: "3em" }} ><Footer></Footer></div>
     </div>
   );
 }
