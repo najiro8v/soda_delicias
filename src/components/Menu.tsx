@@ -49,9 +49,6 @@ const Menu = () => {
 							<li className="nav-item ">
 								<Link className="nav-link" to="/contacto">Contáctenos</Link>
 							</li>
-							{/*<li className="nav-item ">
-								<Link className="nav-link" to="/express" >Express</Link>
-								</li>*/}
 							{usuario === "Administrador" ? <MenuAdmin /> : null}
 							<li className="nav-item d-block d-lg-none d-md-none d-xl-none text-light bg-white" >
 								<i className={"bi bi-" + iCart + " text-secondary"}
@@ -67,7 +64,7 @@ const Menu = () => {
 											className="nav-link  "
 											title={<i className="bi bi-gear "></i>}
 										>
-											<NavDropdown.Item onClick={(e) => { history.push("edit") }}>editar</NavDropdown.Item>
+											<NavDropdown.Item onClick={(e) => { history.push("edit") }}>Editar Perfil</NavDropdown.Item>
 											<NavDropdown.Divider />
 											<NavDropdown.Item onClick={cerrarSesion}>Cerrar Sesion</NavDropdown.Item>
 										</NavDropdown>
@@ -94,7 +91,7 @@ const Menu = () => {
 								title={<i className="bi bi-gear text-secondary"></i>}
 								className="d-inline-block"
 							>
-								<NavDropdown.Item onClick={(e) => { history.push("edit") }}>Editar</NavDropdown.Item>
+								<NavDropdown.Item onClick={(e) => { history.push("edit") }}>Editar Perfil</NavDropdown.Item>
 								<NavDropdown.Divider />
 								<NavDropdown.Item onClick={cerrarSesion}>Cerrar Sesion</NavDropdown.Item>
 							</NavDropdown> : <span

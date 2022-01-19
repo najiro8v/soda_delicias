@@ -10,21 +10,31 @@ const MenuComida = (props: any) => {
     useEffect(() => {
         const readData = async () => {
             try {
-                let myHeaders = new Headers();
-                myHeaders.append("Content-Type", "application/json");
-                myHeaders.append("Access-Control-Allow-Origin", "*");
-                await fetch("https://api-sodadelicias.herokuapp.com/api/products/menu", {
-                    method: 'GET',
-                    headers: myHeaders,
-                    redirect: 'follow'
-                })
-                    .then(response => response.json())
-                    .then(result => {
-                        let { Ordenado, listaModales } = result;
-                        setImg(Ordenado);
-                        setOpenModal(listaModales);
+                let OrderSort = JSON.parse(sessionStorage.getItem("Ordenado") || "{}");
+                let listModals = JSON.parse(sessionStorage.getItem("Ordenado") || "{}");
+                if (OrderSort.length === undefined) {
+                    let myHeaders = new Headers();
+                    myHeaders.append("Content-Type", "application/json");
+                    myHeaders.append("Access-Control-Allow-Origin", "*");
+                    await fetch("https://api-sodadelicias.herokuapp.com/api/products/menu", {
+                        method: 'GET',
+                        headers: myHeaders,
+                        redirect: 'follow'
                     })
-                    .catch(error => console.log('error', error));
+                        .then(response => response.json())
+                        .then(result => {
+                            let { Ordenado, listaModales } = result;
+                            setImg(Ordenado);
+                            setOpenModal(listaModales);
+                            sessionStorage.setItem("Ordenado", JSON.stringify(Ordenado));
+                            sessionStorage.setItem("OpenModales", JSON.stringify(listaModales));
+                        })
+                        .catch(error => console.log('error', error));
+                } else {
+                    setImg(OrderSort);
+                    setOpenModal(listModals);
+                }
+
             } catch (error) {
                 console.error(error);
             }

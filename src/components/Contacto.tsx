@@ -3,17 +3,19 @@ import { dbNSQL } from "../firebaseconfig";
 
 const Contacto = () => {
     const [img, setImg] = useState([] as any)
-    
     useEffect(() => {
         const fotos = async () => {
-            await dbNSQL.collection("Otros").get().then((data: any) => {
-                let usuario = data.docs.map((element: any) => { let { url } = element.data(); return url; });
-
-                setImg(usuario);
-
-            })
-
-
+            let PictureContact = JSON.parse(sessionStorage.getItem("PicturesContact") || "{}");
+            if (PictureContact.length === undefined) {
+                await dbNSQL.collection("Otros").get().then((data: any) => {
+                    let usuario = data.docs.map((element: any) => { let { url } = element.data(); return url; });
+                    setImg(usuario);
+                    sessionStorage.setItem("PicturesContact", JSON.stringify(usuario));
+                })
+            }
+            else {
+                setImg(PictureContact);
+            }
         }
         fotos();
     }, [])
@@ -111,22 +113,22 @@ const Contacto = () => {
                         <p className="d-block d-sm-none h6 m-0">
                             Puedes pedir tu pedido al número <b>63604906</b> o enviarnos un mensaje a nuestro WhatsApp
                             <a title="Whatsapp" href="https://api.whatsapp.com/send?phone=50663604906" rel="noreferrer" target="_blank" className=" ms-2 pe-auto btn bg-success btn-small"  >
-                            <i className="bi bi-whatsapp text-white "></i>
-                        </a>
+                                <i className="bi bi-whatsapp text-white "></i>
+                            </a>
                         </p>
                         <p className="d-none d-sm-block  d-md-none h3 m-0">
                             Puedes pedir tu pedido al número <b>63604906</b> o enviarnos un mensaje a nuestro WhatsApp
                             <a title="Whatsapp" href="https://api.whatsapp.com/send?phone=50663604906" rel="noreferrer" target="_blank" className=" ms-2 pe-auto  btn bg-success">
-                            <i className="bi bi-whatsapp text-white "></i>
-                        </a>
+                                <i className="bi bi-whatsapp text-white "></i>
+                            </a>
                         </p>
                         <p className="d-none d-md-block h2 m-0">
                             Puedes pedir tu pedido al número <b>63604906</b> o enviarnos un mensaje a nuestro WhatsApp
                             <a title="Whatsapp" href="https://api.whatsapp.com/send?phone=50663604906" rel="noreferrer" target="_blank" className=" ms-2 pe-auto btn bg-success">
-                            <i className="bi bi-whatsapp text-white "></i>
-                        </a>
+                                <i className="bi bi-whatsapp text-white "></i>
+                            </a>
                         </p>
-                        
+
                     </div>
                 </div>
             </div>

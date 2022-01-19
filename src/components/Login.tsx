@@ -19,7 +19,7 @@ const Login = () => {
                     edad: null,
                     numero: null,
                     dirrecion: null,
-                    img: null,
+                    img:"https://firebasestorage.googleapis.com/v0/b/soda-delicias.appspot.com/o/UserIcons%2FClientDefault.png?alt=media&token=83457130-a434-4b8f-b35a-8f2a264dbb21",
                 }
                 dbNSQL.collection("user").add(Product);
                 history.push("/");
