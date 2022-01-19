@@ -17,13 +17,15 @@ import "process";
 
 function App() {
   const [usuario, setUsuario] = useState(null as any);
+  const [usuarioID, setUsuarioID] = useState(null as any);
   const [compras, setCompras] = useState([] as any);
   useEffect(() => {
     auth.onAuthStateChanged(async (user) => {
       if (user) {
         await dbNSQL.collection("user").get().then((data: any) => {
-          let usuario = data.docs.map((element: any) => { let { uid } = element.data(); if (uid === user.uid) { return element.data() } else { return undefined } }).filter((data: any) => data !== undefined)[0];
+          let usuario = data.docs.map((element: any) => { let { uid } = element.data(); if (uid === user.uid) { let obj=element.data(); obj.id=element.id;return obj; } else { return undefined } }).filter((data: any) => data !== undefined)[0];
           setUsuario(usuario === undefined ? null : usuario.tipo);
+          setUsuarioID(usuario === undefined ? null : usuario.id);
           window.localStorage.setItem("userType", usuario)
         })
       }
@@ -47,10 +49,10 @@ function App() {
 
           {usuario ? usuario !== "Administrador" ?
             <Switch>
-              <Route path="/edit" component={EditUser}></Route>
+              <Route path="/edit"><EditUser userId={usuarioID}></EditUser></Route>
             </Switch> :
             <Switch>
-              <Route path="/edit" component={EditUser}></Route>
+              <Route path="/edit"><EditUser userId={usuarioID}></EditUser></Route>
               <Route path="/addProduct" component={AddProduct}></Route>
             </Switch>
             : null

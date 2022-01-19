@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import {  auth, storageBucket } from "../firebaseconfig";
+import { auth, storageBucket } from "../firebaseconfig";
 import "../css/EditUser.css";
+
 const Plantilla = "https://firebasestorage.googleapis.com/v0/b/soda-delicias.appspot.com/o/UserIcons%2FClientDefault.png?alt=media&token=83457130-a434-4b8f-b35a-8f2a264dbb21";
-const EditUser = () => {
+const EditUser = (props: any) => {
     const history = useHistory();
     const [id, setId] = useState("");
     const [usuario, setUsuario] = useState(null as any);
@@ -14,30 +15,33 @@ const EditUser = () => {
     const [nombre, setNombre] = useState("");
     const [email, setEmail] = useState("");
     const [img, setImg] = useState(null as any);
-    //email, tipo, nombre, edad, dirrecion, img
     const subirFoto = async (e: any) => {
         e.preventDefault();
         try {
             let file = img[0];
-            let storageRef = await storageBucket.ref('UsersIcons/' + id);
-            await storageRef.put(file).then(async (data: any) => {
-
-                await storageRef.getDownloadURL().then((ulr: any) => {
-                    setPathImg(ulr);
+            let URLImg = "";
+            if (typeof img !=="string") {
+                let storageRef = await storageBucket.ref('UserIcons/' + id);
+                await storageRef.put(file).then(async () => {
+                    await storageRef.getDownloadURL().then((ulr: any) => {
+                        console.log(ulr);
+                        URLImg = ulr;
+                        setPathImg(ulr);
+                    });
                 });
-            });
+            }
             let myHeaders = new Headers();
             let raw = {
                 id,
-                img: pathImg,
-                dirrecion, 
+                img: URLImg===""?img:URLImg,
+                dirrecion,
                 numero,
                 nombre,
                 edad
             }
             myHeaders.append("Content-Type", "application/json");
             myHeaders.append("Access-Control-Allow-Origin", "*");
-            await fetch("http://localhost:8080/api/user/", {
+            await fetch(`${process.env.REACT_APP_IP_API}user/`, {
                 method: 'POST',
                 body: JSON.stringify(raw),
                 headers: myHeaders,
@@ -48,10 +52,6 @@ const EditUser = () => {
                     history.push("/")
                 })
                 .catch(error => console.log('error', error));
-            /*
-            dbNSQL.collection("user").doc(id).set(Product).then((e: any) => {
-                history.push("/")
-            });*/
         } catch (e) { console.error(e); }
 
     }
@@ -62,7 +62,7 @@ const EditUser = () => {
                     let myHeaders = new Headers();
                     myHeaders.append("Content-Type", "application/json");
                     myHeaders.append("Access-Control-Allow-Origin", "*");
-                    await fetch("http://localhost:8080/api/user/VL3B5sMYyo5AAuhfhqxX", {
+                    await fetch(`${process.env.REACT_APP_IP_API}user/${props.userId}`, {
                         method: 'GET',
                         headers: myHeaders,
                         redirect: 'follow'
@@ -71,29 +71,16 @@ const EditUser = () => {
                         .then(result => {
                             let { id, email, numero, nombre, edad, dirrecion, img } = result;
                             setUsuario(usuario);
-                            setDirrecion(dirrecion)
-                            setId(id)
+                            setDirrecion(dirrecion);
+                            setId(id);
                             setImg(img);
-                            setPathImg(img)
+                            setPathImg(img);
                             setNumero(numero);
                             setNombre(nombre);
                             setEmail(email)
                             setEdad(edad)
                         })
                         .catch(error => console.log('error', error));
-                    /* await dbNSQL.collection("user").get().then((data: any) => {
-                         let usuario = data.docs.map((element: any) => { let { uid } = element.data(), data = element.data(), { id } = element; data.id = id; if (uid === user.uid) { return data } else { return undefined } }).filter((data: any) => data !== undefined)[0];
-                         let { id, email, numero, nombre, edad, dirrecion, img } = usuario;
- 
-                         setUsuario(usuario);
-                         setDirrecion(dirrecion)
-                         setId(id)
-                         setImg(img);
-                         setNumero(numero);
-                         setNombre(nombre);
-                         setEmail(email)
-                         setEdad(edad)
-                     })*/
                 } catch (e) { console.error(e) }
             }
             else {
