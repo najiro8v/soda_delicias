@@ -27,7 +27,7 @@ const Carrito = (props: any) => {
             try {
                 var myHeaders = new Headers();
                 myHeaders.append("Content-Type", "application/json");
-                myHeaders.append("Access-Control-Allow-Origin", "*");
+                myHeaders.append("Access-Control-Allow-Origin", "https://soda-delicias.web.app/");
                 const { arrayTemp, arrayId } = repetidos();
                 const raw = JSON.stringify({ arrayTemp, arrayId });
                 await fetch("https://api-sodadelicias.herokuapp.com/api/products/carshop", {

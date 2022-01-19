@@ -40,7 +40,7 @@ const EditUser = (props: any) => {
                 edad
             }
             myHeaders.append("Content-Type", "application/json");
-            myHeaders.append("Access-Control-Allow-Origin", "*");
+            myHeaders.append("Access-Control-Allow-Origin", "https://soda-delicias.web.app/");
             await fetch(`${process.env.REACT_APP_IP_API}user/`, {
                 method: 'POST',
                 body: JSON.stringify(raw),
@@ -61,7 +61,7 @@ const EditUser = (props: any) => {
                 try {
                     let myHeaders = new Headers();
                     myHeaders.append("Content-Type", "application/json");
-                    myHeaders.append("Access-Control-Allow-Origin", "*");
+                    myHeaders.append("Access-Control-Allow-Origin", "https://soda-delicias.web.app/");
                     await fetch(`${process.env.REACT_APP_IP_API}user/${props.userId}`, {
                         method: 'GET',
                         headers: myHeaders,

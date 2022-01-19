@@ -15,7 +15,7 @@ const MenuComida = (props: any) => {
                 if (OrderSort.length === undefined) {
                     let myHeaders = new Headers();
                     myHeaders.append("Content-Type", "application/json");
-                    myHeaders.append("Access-Control-Allow-Origin", "*");
+                    myHeaders.append("Access-Control-Allow-Origin", "https://soda-delicias.web.app/");
                     await fetch("https://api-sodadelicias.herokuapp.com/api/products/menu", {
                         method: 'GET',
                         headers: myHeaders,
