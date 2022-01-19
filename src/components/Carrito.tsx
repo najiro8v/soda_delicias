@@ -32,7 +32,6 @@ const Carrito = (props: any) => {
                 const raw = JSON.stringify({ arrayTemp, arrayId });
                 await fetch("https://api-sodadelicias.herokuapp.com/api/products/carshop", {
                     method: 'POST',
-                    mode:"cors",
                     headers: myHeaders,
                     body: raw,
                     redirect: 'follow'

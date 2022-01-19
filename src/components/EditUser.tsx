@@ -43,6 +43,7 @@ const EditUser = (props: any) => {
             myHeaders.append("Access-Control-Allow-Origin", "*");
             await fetch(`${process.env.REACT_APP_IP_API}user/`, {
                 method: 'POST',
+                mode:"no-cors",
                 body: JSON.stringify(raw),
                 headers: myHeaders,
                 redirect: 'follow'
